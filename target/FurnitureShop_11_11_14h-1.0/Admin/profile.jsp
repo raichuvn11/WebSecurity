@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +22,7 @@
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
+    <style nonce="<%= cspNonce %>">
         /* Tùy chỉnh font chữ và khung cho các ô nhập */
         .form-control {
             font-family: 'Arial', sans-serif;

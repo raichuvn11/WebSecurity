@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -137,8 +139,20 @@
 <script src="<c:url value='/assets/js/jquery-3.6.0.min.js'/>"></script>
 <script src="<c:url value='/assets/js/bootstrap.bundle.min.js'/>"></script>
 <script src="<c:url value='/assets/js/script.js'/>"></script>
+<script nonce="<%= cspNonce %>">
+    (function(){
+        const originalCreateElement = document.createElement;
+        document.createElement = function(tagName) {
+            const el = originalCreateElement.call(document, tagName);
+            if (tagName.toLowerCase() === 'style') {
+                el.setAttribute('nonce', '<%= cspNonce %>');
+            }
+            return el;
+        }
+    })();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
+<script nonce="<%= cspNonce %>">
     // Preview uploaded image
     const imgInp = document.getElementById('imgInp');
     const blah = document.getElementById('blah');

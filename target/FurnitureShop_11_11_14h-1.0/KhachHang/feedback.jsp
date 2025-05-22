@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -49,19 +50,25 @@
 <div class="feedback-container">
     <h2>Phản hồi của bạn</h2>
     <div class="emojis-rate">
-        <img src="../images/rate1.png" alt="Very Dissatisfied" class="emoji-rate" onclick="selectIcon(this, 1)">
-        <img src="../images/rate2.png" alt="Dissatisfied" class="emoji-rate" onclick="selectIcon(this, 2)">
-        <img src="../images/rate3.png" alt="Neutral" class="emoji-rate" onclick="selectIcon(this, 3)">
-        <img src="../images/rate4.png" alt="Satisfied" class="emoji-rate" onclick="selectIcon(this, 4)">
-        <img src="../images/rate5.png" alt="Very Satisfied" class="emoji-rate" onclick="selectIcon(this, 5)">
+        <img src="../images/rate1.png" alt="Very Dissatisfied" class="emoji-rate" data-rate="1">
+        <img src="../images/rate2.png" alt="Dissatisfied" class="emoji-rate" data-rate="2">
+        <img src="../images/rate3.png" alt="Neutral" class="emoji-rate" data-rate="3">
+        <img src="../images/rate4.png" alt="Satisfied" class="emoji-rate" data-rate="4">
+        <img src="../images/rate5.png" alt="Very Satisfied" class="emoji-rate" data-rate="5">
     </div>
+
     <textarea id="textFeedback" class="text-feedback" placeholder="Nhập phản hồi của bạn ở đây..."></textarea>
+
     <div class="image-upload-container">
         <h2>Chọn ảnh về đơn hàng</h2>
         <input type="file" id="imageInput" accept="image/*" multiple>
         <div id="previewContainer"></div>
     </div>
-    <button type="button" class="btn-feedback" onclick="feedbackOrder(<%= customerId %>, <%= orderId %>)">Gửi</button>
+
+    <!-- Gắn data-* vào nút -->
+    <button type="button" class="btn-feedback"
+            data-customer-id="<%= customerId %>"
+            data-order-id="<%= orderId %>">Gửi</button>
 </div>
 
 <c:import url="../includes/footer.jsp" />
@@ -69,6 +76,30 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/tiny-slider.js"></script>
 <script src="../js/custom.js"></script>
+<script nonce="<%= cspNonce %>">
+    document.addEventListener('DOMContentLoaded', function () {
+        // Biến lưu rating được chọn
+        let selectedRate = 0;
+
+        // Bắt sự kiện click vào emoji
+        document.querySelectorAll('.emoji-rate').forEach(function (emoji) {
+            emoji.addEventListener('click', function () {
+                selectedRate = parseInt(emoji.getAttribute('data-rate'));
+                selectIcon(emoji, selectedRate);
+            });
+        });
+
+        // Bắt sự kiện click nút gửi phản hồi
+        const feedbackButton = document.querySelector('.btn-feedback');
+        if (feedbackButton) {
+            feedbackButton.addEventListener('click', function () {
+                const customerId = feedbackButton.getAttribute('data-customer-id');
+                const orderId = feedbackButton.getAttribute('data-order-id');
+                feedbackOrder(customerId, orderId, selectedRate);
+            });
+        }
+    });
+</script>
 </body>
 
 </html>

@@ -8,11 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Thống kê trạng thái đơn hàng";
         const listStaffElement = document.getElementById("order-status");
@@ -24,7 +25,15 @@
 
 <div class="page-wrapper">
     <div class="content">
-        <div class="row" style="justify-content: center;">
+        <style nonce="<%= cspNonce %>">
+            .center {
+                justify-content: center;
+            }
+            .max-with{
+                max-width: 90%; width: 90%;
+            }
+        </style>
+        <div class="row center">
 
 
             <div class="col-lg-3 col-sm-6 col-12 d-flex">
@@ -125,7 +134,11 @@
                         <tbody>
                         <c:forEach var="order" items="${orders}">
                             <tr>
-                                <td><a href="javascript:void(0);" onclick="viewListProduct(${order.id})">${order.id}</a></td>
+                                <td>
+                                    <a href="javascript:void(0);" class="view-order" data-order-id="${order.id}">
+                                            ${order.id}
+                                    </a>
+                                </td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${order.status == 'CANCELED'}">Đã hủy</c:when>
@@ -146,11 +159,11 @@
 </div>
 </div>
 <div class="modal fade" id="productOfOrderList" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document" style="max-width: 90%; width: 90%;">
+    <div class="modal-dialog modal-xl max-with" role="document">
         <div class="modal-content" id="orderModalContent">
             <div class="modal-header" id="orderModalHeader">
                 <h5 class="modal-title" id="modalTitle">Chi Tiết Hóa Đơn</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#productOfOrderList').modal('hide')">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -201,11 +214,31 @@
                 </div>
             </div>
             <div class="modal-footer" id="orderModalFooter">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#productOfOrderList').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-secondary close-modal-btn" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
 </div>
+<script nonce="<%= cspNonce %>">
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.view-order').forEach(function(link) {
+            link.addEventListener('click', function() {
+                const orderId = this.getAttribute('data-order-id');
+                viewListProduct(orderId);
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.close').addEventListener('click', function() {
+            $('#productOfOrderList').modal('hide');
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.close-modal-btn').addEventListener('click', function() {
+            $('#productOfOrderList').modal('hide');
+        });
+    });
+</script>
 <c:import url="footer.jsp"/>
 <jsp:include page="${pageContext.request.contextPath}/ordercustomer/loadProductOfOrder.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/ordercustomer/customer.css">

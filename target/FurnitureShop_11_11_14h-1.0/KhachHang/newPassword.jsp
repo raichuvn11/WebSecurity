@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 
 <!doctype html>
@@ -14,7 +15,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <style>
+    <style nonce="<%= cspNonce %>">
         .placeicon {
             font-family: fontawesome;
         }

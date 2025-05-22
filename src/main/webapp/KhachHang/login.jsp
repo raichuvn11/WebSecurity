@@ -5,6 +5,8 @@ Author     : HUY
 --%>
 <%@ page import="constant.constant" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!DOCTYPE html>
 <html>
 <head>

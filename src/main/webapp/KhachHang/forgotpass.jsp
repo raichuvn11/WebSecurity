@@ -84,6 +84,8 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
 -->
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +96,7 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <style>
+    <style nonce="<%= cspNonce %>">
         body {
             background-color: #eee;
             color: #505050;

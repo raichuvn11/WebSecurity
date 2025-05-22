@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Thống kê sản phẩm";
         const listStaffElement = document.getElementById("top-product");
@@ -23,7 +25,12 @@
 
     <div class="page-wrapper">
         <div class="content">
-            <div class="row" style="justify-content: center;">
+            <style nonce="<%= cspNonce %>">
+                .center {
+                    justify-content: center;
+                }
+            </style>
+            <div class="row center" >
                 <div class="col-lg-3 col-sm-6 col-12">
                     <div class="dash-widget">
                         <div class="dash-widgetimg">

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Thêm sản phẩm";
         const listStaffElement = document.getElementById("add-product");
@@ -71,7 +72,7 @@
                             <div class="form-group">
                                 <label>Ảnh sản phẩm</label>
                                 <div class="image-upload">
-                                    <input type="file" id="file-input" name="images" multiple onchange="previewImage(event)">
+                                    <input type="file" id="file-input" name="images" multiple >
                                     <div class="image-uploads" id="image-preview">
                                         <img src="assets/img/icons/upload.svg" alt="img">
                                         <h4>Kéo thả file từ thư mục để thêm ảnh</h4>
@@ -95,4 +96,11 @@
     </div>
 </div>
 </div>
+<script nonce="<%= cspNonce %>">
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('#file-input').forEach(function(input) {
+            input.addEventListener('change', previewImage);
+        });
+    });
+</script>
 <c:import url="footer.jsp"/>

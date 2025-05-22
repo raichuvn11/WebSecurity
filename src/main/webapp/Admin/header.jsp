@@ -1,5 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +35,14 @@
 <div class="main-wrapper">
 
     <div class="header">
-
+        <style nonce="<%= cspNonce %>">
+            .img-logo{
+                height: 100px;
+            }
+        </style>
         <div class="header-left active">
             <a href="listStaff" class="logo">
-                <img src="${pageContext.request.contextPath}/images/logoshop2.png" alt="" style="height: 100px;">
+                <img src="${pageContext.request.contextPath}/images/logoshop2.png" alt="" class="img-logo">
             </a>
             <a href="listStaff" class="logo-small">
                 <img src="${pageContext.request.contextPath}/images/logoFurni.png" alt="">
@@ -70,7 +76,7 @@
                             </div>
                         </div>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="${pageContext.request.contextPath}/KhachHang/login.jsp"><img src="${pageContext.request.contextPath}/assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="${pageContext.request.contextPath}/LogoutServlet"><img src="${pageContext.request.contextPath}/assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>

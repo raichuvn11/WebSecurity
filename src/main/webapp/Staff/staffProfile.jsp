@@ -120,7 +120,7 @@
                         <div class="col-12 mt-4">
                             <button type="submit"  class="btn btn-primary w-100" href="../loadProfile">Cập nhật thông tin</button>
                         </div>
-                </div>
+
                 </form>
 
                 <c:if test="${showChangePasswordButton}">

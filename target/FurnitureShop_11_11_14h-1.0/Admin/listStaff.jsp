@@ -2,11 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Quản lý nhân viên";
         const listStaffElement = document.getElementById("list-staff");
@@ -29,7 +30,23 @@
             </div>
 
         </div>
-
+        <style nonce="<%= cspNonce %>">
+            .margin-right5{
+                margin-right: 5px;
+            }
+            .wh50{
+                width: 50px; height: 50px;
+            }
+            .span-green{
+                color: green; font-style: italic
+            }
+            .span-red{
+                color: red; font-style: italic
+            }
+            .wh24{
+                width: 24px; height: 24px;
+            }
+        </style>
         <div class="card">
             <div class="card-body">
                 <div class="table-top">
@@ -41,7 +58,7 @@
                             </a>
                         </div>
                         <form action="${pageContext.request.contextPath}/searchStaff" method="post" class="d-flex justify-content-center">
-                            <input type="text" class="form-control" name="search-name" value="${searchName}" placeholder="Nhập tên tìm kiếm..." style="margin-right: 5px;">
+                            <input type="text" class="form-control margin-right5" name="search-name" value="${searchName}" placeholder="Nhập tên tìm kiếm...">
                             <button type="submit" name="search-action" value="search-name" class="btn btn-filters ms-auto">
                                 <img src="assets/img/icons/search-whites.svg" alt="img">
                             </button>
@@ -117,10 +134,10 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <c:if test="${staff.avatar != null}">
-                                            <img src="data:image/jpeg;base64,${ImageUtil.DisplayImage(staff.avatar)}" alt="Avatar" class="rounded-circle me-2" style="width: 50px; height: 50px;">
+                                            <img src="data:image/jpeg;base64,${ImageUtil.DisplayImage(staff.avatar)}" alt="Avatar" class="rounded-circle me-2 wh50" >
                                         </c:if>
                                         <c:if test="${staff.avatar == null}">
-                                            <img src="images/blankavatar.jpg" alt="Avatar" class="rounded-circle me-2" style="width: 50px; height: 50px;">
+                                            <img src="images/blankavatar.jpg" alt="Avatar" class="rounded-circle me-2 wh50">
                                         </c:if>
                                         <span>${staff.name}</span>
                                     </div>
@@ -131,29 +148,30 @@
                                 <td><fmt:formatDate value="${staff.workDate}" pattern="yyyy-MM-dd" /></td>
                                 <td>
                                     <c:if test="${staff.status == 'Active'}">
-                                        <span style="color: green; font-style: italic">Đang làm việc</span>
+                                        <span class="span-green">Đang làm việc</span>
                                     </c:if>
                                     <c:if test="${staff.status == 'InActive'}">
-                                        <span style="color: red; font-style: italic">Đã nghỉ việc</span>
+                                        <span class="span-red">Đã nghỉ việc</span>
                                     </c:if>
                                 </td>
                                 <td>
                                     <form action="${pageContext.request.contextPath}/editStaff" method="post" class="d-inline me-3" title="Chi tiết">
                                         <input type="hidden" name="emp-id" value="${staff.personID}"/>
                                         <button type="submit" class="btn p-0 border-0 bg-transparent">
-                                            <img src="assets/img/icons/edit.svg" alt="Edit" style="width: 24px; height: 24px;">
+                                            <img src="assets/img/icons/edit.svg" alt="Edit" class="wh24">
                                         </button>
                                     </form>
                                     <form action="${pageContext.request.contextPath}/deleteStaff" method="post" id="delete-form" class="d-inline me-3" title="Xóa">
                                         <input type="hidden" name="emp-id" value="${staff.personID}"/>
                                         <c:if test="${staff.status == 'Active'}">
-                                            <button type="submit" name="action" value="delete" class="btn p-0 border-0 bg-transparent" id="delete-button" onclick="return confirmSubmission('Xác nhận xóa nhân viên này?')">
-                                                <img src="assets/img/icons/delete.svg" alt="Delete" style="width: 24px; height: 24px;">
+                                            <button type="submit" name="action" value="delete" class="btn p-0 border-0 bg-transparent" id="delete-button">
+                                                <img src="assets/img/icons/delete.svg" alt="Delete" class="wh24">
                                             </button>
+
                                         </c:if>
                                         <c:if test="${staff.status == 'InActive'}">
-                                            <button type="submit" name="action" value="restore" class="btn p-0 border-0 bg-transparent" id="delete-button" onclick="return confirmSubmission('Xác nhận khôi phục tài khoản nhân viên này?')">
-                                                <img src="assets/img/icons/restore.svg" alt="Restore" style="width: 24px; height: 24px;">
+                                            <button type="submit" name="action" value="restore" class="btn p-0 border-0 bg-transparent" id="restore-button">
+                                                <img src="assets/img/icons/restore.svg" alt="Restore" class="wh24">
                                             </button>
                                         </c:if>
                                     </form>
@@ -178,9 +196,29 @@
 </div>
 </div>
 <script src="scripts/pagination.js"></script>
-<script>
+<script nonce="<%= cspNonce %>">
     function confirmSubmission(messageConfirm) {
         return confirm(messageConfirm);
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteBtn = document.getElementById('delete-button');
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', function(event) {
+                if (!confirmSubmission('Xác nhận xóa nhân viên này?')) {
+                    event.preventDefault(); // ngăn submit form nếu không xác nhận
+                }
+            });
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const restoreBtn = document.getElementById('restore-button');
+        if (restoreBtn) {
+            restoreBtn.addEventListener('click', function(event) {
+                if (!confirmSubmission('Xác nhận khôi phục tài khoản nhân viên này?')) {
+                    event.preventDefault(); // Ngăn submit nếu user cancel
+                }
+            });
+        }
+    });
 </script>
 <c:import url="footer.jsp"/>

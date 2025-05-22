@@ -1,23 +1,27 @@
 package utils;
 
-import org.apache.commons.codec.binary.Base64;
 
+
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Base64;
 
 public class MaHoa {
-    // sha-1 => thường được sử dụng
-    public static String toSHA1(String str) {
-        String salt = "asjrlkmcoewj@tjle;oxqskjhdjksjf1jurVn";// Làm cho mật khẩu phức tap
-        String result = null;
 
-        str = str + salt;
+    private static final String SALT = "asjrlkmcoewj@tjle;oxqskjhdjksjf1jurVn";
+
+    // Hàm băm SHA-512 với salt
+    public static String toSHA512(String input) {
         try {
-            byte[] dataBytes = str.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            result = Base64.encodeBase64String(md.digest(dataBytes));
+            String saltedInput = input + SALT;
+
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            byte[] hashBytes = md.digest(saltedInput.getBytes(StandardCharsets.UTF_8));
+
+            return Base64.getEncoder().encodeToString(hashBytes);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return result;
     }
 }

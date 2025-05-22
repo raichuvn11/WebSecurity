@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="FurnitureShop_11_11_14h" options="-endorseddirs D:\HocTap\LapTrinhWeb\Project_Web-main\target/endorsed" />
+      <module name="FurnitureShop_11_11_14h" options="-endorseddirs D:\HocTap\LapTrinhWeb\WebSecurity_CuoiKy\WebSecurity\target/endorsed" />
     </option>
   </component>
 </project>

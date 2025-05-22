@@ -2,11 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Chi tiết nhân viên";// Lấy phần tử bằng id
         const listStaffElement = document.getElementById("list-staff");
@@ -49,15 +50,23 @@
                         <div class="d-flex justify-content-center">
                             <div class="col-lg-3">
                                 <div class="form-group avatar-preview text-center">
+                                    <style nonce="<%= cspNonce %>">
+                                        .avatar{
+                                            width: 150px; height: 150px;
+                                        }
+                                        .none-display{
+                                            display: none;
+                                        }
+                                    </style>
                                     <%@ page import="data.ImageUtil" %>
                                     <c:if test="${staff.avatar != null}">
-                                        <img id="avatar-image" src="data:image/jpeg;base64,${ImageUtil.DisplayImage(staff.avatar)}" alt="Avatar" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                                        <img id="avatar-image" src="data:image/jpeg;base64,${ImageUtil.DisplayImage(staff.avatar)}" alt="Avatar" class="img-thumbnail mb-3 avatar">
                                     </c:if>
                                     <c:if test="${staff.avatar == null}">
-                                        <img id="avatar-image" src="images/blankavatar.jpg" alt="Avatar" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                                        <img id="avatar-image" src="images/blankavatar.jpg" alt="Avatar" class="img-thumbnail mb-3 avatar">
                                     </c:if>
                                     <label for="avatar" class="btn btn-primary btn-sm">Upload Avatar</label>
-                                    <input type="file" class="form-control-file" id="avatar" name="avatar" accept="image/*" onchange="previewAvatar(event)" value="${staff.avatar}" style="display: none;">
+                                    <input type="file" class="form-control-file none-display" id="avatar" name="avatar" accept="image/*" value="${staff.avatar}" >
                                 </div>
                             </div>
                         </div>
@@ -152,7 +161,8 @@
 
                         <div class="col-lg-12">
                             <button type="submit" name="action" value="edit" class="btn btn-submit me-2" <c:if test="${staff.status == 'InActive'}">disabled</c:if>>Chỉnh sửa</button>
-                            <button class="btn btn-cancel" type="button" onclick="window.location.href='${pageContext.request.contextPath}/listStaff'">Quay lại</button>
+                            <button class="btn btn-cancel" type="button" id="btn-back">Quay lại</button>
+
                         </div>
 
                     </div>
@@ -164,4 +174,17 @@
 </div>
 </div>
 <script src="scripts/loadAvatar.js"></script>
+<script nonce="<%= cspNonce %>">
+    document.addEventListener('DOMContentLoaded', function() {
+        const avatarInput = document.getElementById('avatar');
+        if (avatarInput) {
+            avatarInput.addEventListener('change', previewAvatar);
+        }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('btn-back').addEventListener('click', () => {
+            window.location.href = '${pageContext.request.contextPath}/listStaff';
+        });
+    });
+</script>
 <c:import url="footer.jsp"/>

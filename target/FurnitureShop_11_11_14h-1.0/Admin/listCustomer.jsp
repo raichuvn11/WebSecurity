@@ -2,10 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Danh sách khách hàng";
         const listStaffElement = document.getElementById("list-customer");
@@ -25,17 +27,41 @@
                     <h6>Tìm kiếm/xem chi tiết khách hàng </h6>
 
                 </div>
-
-                <div class="button-container" style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
-                    <div class="page-btn" id="btnDeleteCustomers" style="margin: 0; padding: 0;">
-                        <a class="btn btn-added" style="display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; padding: 10px 20px; font-size: 16px; font-weight: 500; line-height: 1;">
-                            <img src="${pageContext.request.contextPath}/assets/img/icons/delete.svg" alt="img" style="width: 16px; height: 16px;">
+                <style nonce="<%= cspNonce %>">
+                    .none-display{
+                        display: none;
+                    }
+                    .button-container{
+                        display: flex; flex-direction: row; align-items: center; gap: 10px;
+                    }
+                    .margin{
+                        margin: 0; padding: 0;
+                    }
+                    .add{
+                        display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; padding: 10px 20px; font-size: 16px; font-weight: 500; line-height: 1;
+                    }
+                    .wh16{
+                        width: 16px; height: 16px;
+                    }
+                    .search{
+                        font-size: 1.2em; font-weight: 400; color: #4a4a4a; font-family: 'Poppins', sans-serif; font-style: italic; margin: 0;
+                        padding: 8px 12px; display: flex; align-items: center; background-color: #f9fbfd; border-radius: 8px;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1); letter-spacing: 0.5px;
+                    }
+                    .margin-left{
+                        margin-left: 10px;
+                    }
+                </style>
+                <div class="button-container">
+                    <div class="page-btn margin" id="btnDeleteCustomers">
+                        <a class="btn btn-added add" >
+                            <img src="${pageContext.request.contextPath}/assets/img/icons/delete.svg" alt="img" class="wh16">
                             Khóa Khách Hàng
                         </a>
                     </div>
-                    <div class="page-btn" id="btnUnlockCustomers" style="margin: 0; padding: 0;">
-                        <a class="btn btn-success" style="display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; padding: 10px 20px; font-size: 16px; font-weight: 500; line-height: 1;">
-                            <img src="${pageContext.request.contextPath}/assets/img/icons/edit-set.svg" alt="img" style="width: 16px; height: 16px;">
+                    <div class="page-btn margin" id="btnUnlockCustomers" >
+                        <a class="btn btn-success add" >
+                            <img src="${pageContext.request.contextPath}/assets/img/icons/edit-set.svg" alt="img" class="wh16">
                             Mở Khóa Khách Hàng
                         </a>
                     </div>
@@ -62,11 +88,8 @@
                     <%--&lt;%&ndash; </div>&ndash;%&gt;--%>
                     <%-- </div>--%>
                     <div class="search-header">
-                        <h6 class="search-title"
-                            style="font-size: 1.2em; font-weight: 400; color: #4a4a4a; font-family: 'Poppins', sans-serif; font-style: italic; margin: 0;
-           padding: 8px 12px; display: flex; align-items: center; background-color: #f9fbfd; border-radius: 8px;
-           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1); letter-spacing: 0.5px;">
-                            🔍 <span style="margin-left: 10px;">Tìm Kiếm Khách Hàng</span>
+                        <h6 class="search-title search">
+                            🔍 <span class="margin-left">Tìm Kiếm Khách Hàng</span>
                         </h6>
                     </div>
                     <div class="card-body pb-0">
@@ -184,10 +207,18 @@
                                         <img src="${pageContext.request.contextPath}/assets/img/icons/eye.svg" alt="order">
                                     </a>
 
-                                    <a class="me-3" href="javascript:void(0);" onclick="deleteCustomer('${customer.personID}', '${customer.status}')" title="Khóa Tài Khoản">
+                                    <a class="me-3 delete-customer-btn"
+                                       href="javascript:void(0);"
+                                       data-id="${customer.personID}"
+                                       data-status="${customer.status}"
+                                       title="Khóa Tài Khoản">
                                         <img src="${pageContext.request.contextPath}/assets/img/icons/delete.svg" alt="delete">
                                     </a>
-                                    <a class="me-3" href="javascript:void(0);" onclick="unlockCustomer('${customer.personID}', '${customer.status}')" title="Mở Khóa Tài Khoản">
+                                    <a class="me-3 unlock-customer-btn"
+                                       href="javascript:void(0);"
+                                       data-id="${customer.personID}"
+                                       data-status="${customer.status}"
+                                       title="Mở Khóa Tài Khoản">
                                         <img src="${pageContext.request.contextPath}/assets/img/icons/edit.svg" alt="edit">
                                     </a>
 
@@ -215,8 +246,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#confirmDeleteModal').modal('hide')">
-                    <span aria-hidden="true">&times; </span>
+                <button type="button" class="close close-confirm-delete-modal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -233,12 +264,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea id="deleteReasonText" class="form-control" placeholder="Nhập lý do khác (nếu có)" style="display: none;"></textarea>
+                    <textarea id="deleteReasonText" class="form-control none-display" placeholder="Nhập lý do khác (nếu có)" ></textarea>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="$('#confirmDeleteModal').modal('hide')">Hủy</button>
+                <button type="button" class="btn btn-secondary btn-cancel-delete">Hủy</button>
+
                 <button type="button" class="btn btn-danger" id="confirmDeleteButton">Xóa</button>
             </div>
 
@@ -250,8 +282,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="t">Xác nhận </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#deleteCustomer').modal('hide')">
-                    <span aria-hidden="true">&times; </span>
+                <button type="button" class="close close-delete-modal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -259,7 +291,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#deleteCustomer').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger close-delete-modal">Đóng</button>
             </div>
         </div>
     </div>
@@ -269,8 +301,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="thu">Xác nhận </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#deleteCustomerSuccess').modal('hide')">
-                    <span aria-hidden="true">&times; </span>
+                <button type="button" class="close close-success-modal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -278,7 +310,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#deleteCustomerSuccess').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger close-success-modal">Đóng</button>
             </div>
         </div>
     </div>
@@ -289,8 +321,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="thu1">Xác nhận mở khóa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#unlockCustomerSuccess').modal('hide')">
-                    <span aria-hidden="true">&times; </span>
+                <button type="button" class="close close-modal" data-target="#unlockCustomerSuccess" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -298,7 +330,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#unlockCustomerSuccess').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger btn-close-modal" data-target="#unlockCustomerSuccess">Đóng</button>
             </div>
         </div>
     </div>
@@ -308,7 +340,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="errorModalLabel">Thông Báo Lỗi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#errorModal').modal('hide')">
+                <button type="button" class="close close-error-modal" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times; </span>
                 </button>
             </div>
@@ -316,7 +348,7 @@
                 <h6 id="errorMessage"></h6>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#errorModal').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger btn-close-error">Đóng</button>
             </div>
         </div>
     </div>
@@ -327,8 +359,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="status">Xác nhận </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#customerStatus').modal('hide')">
-                    <span aria-hidden="true">&times; </span>
+                <button type="button" class="close btn-close-customerStatus" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -336,7 +368,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#customerStatus').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger btn-close-customerStatus">Đóng</button>
             </div>
         </div>
     </div>
@@ -347,7 +379,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="unlockStatus">Xác nhận </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#unlockCustomerStatus').modal('hide')">
+                <button type="button" class="close btn-close-unlockCustomerStatus" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times; </span>
                 </button>
             </div>
@@ -356,7 +388,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#unlockCustomerStatus').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger btn-close-unlockCustomerStatus">Đóng</button>
             </div>
         </div>
     </div>
@@ -367,7 +399,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="statusList">Xác nhận </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#customerStatusList').modal('hide')">
+                <button type="button" class="close btn-close-customerStatusList" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -376,7 +408,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="btnUncheckCustomers" >Bỏ chọn</button>
-                <button type="button" class="btn btn-danger" onclick="$('#customerStatusList').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger btn-close-customerStatusList">Đóng</button>
             </div>
         </div>
     </div>
@@ -387,7 +419,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="statusLit">Xác nhận </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#unlockCustomerStatusList').modal('hide')">
+                <button type="button" class="close btn-close-unlockCustomerStatusList" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -396,7 +428,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="btnUnlockUncheckCustomers" >Bỏ chọn</button>
-                <button type="button" class="btn btn-danger" onclick="$('#unlockCustomerStatusList').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger btn-close-unlockCustomerStatusList">Đóng</button>
             </div>
         </div>
     </div>
@@ -408,7 +440,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="confirmUnlockModalLabel">Xác nhận mở khóa tài khoản</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#confirmUnlockModal').modal('hide')">
+                <button type="button" class="close btn-close-confirmUnlockModal" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -416,13 +448,127 @@
                 <h6>Bạn có chắc chắn muốn mở khóa tài khoản của khách hàng này không?</h6>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="$('#confirmUnlockModal').modal('hide')">Hủy</button>
+                <button type="button" class="btn btn-secondary btn-cancel-confirmUnlockModal">Hủy</button>
                 <button type="button" class="btn btn-success" id="confirmUnlockButton">Mở Khóa</button>
             </div>
         </div>
     </div>
 </div>
+<script nonce="<%= cspNonce %>">
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.delete-customer-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const id = btn.getAttribute('data-id');
+                const status = btn.getAttribute('data-status');
+                deleteCustomer(id, status);
+            });
+        });
+    });
+    document.querySelectorAll('.unlock-customer-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const id = btn.getAttribute('data-id');
+            const status = btn.getAttribute('data-status');
+            unlockCustomer(id, status);
+        });
+    });
+    document.querySelectorAll('.close-confirm-delete-modal').forEach(function(button) {
+        button.addEventListener('click', function() {
+            $('#confirmDeleteModal').modal('hide');
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-cancel-delete').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                $('#confirmDeleteModal').modal('hide');
+            });
+        });
+    });
 
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.close-delete-modal').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                $('#deleteCustomer').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.close-success-modal').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                $('#deleteCustomerSuccess').modal('hide');
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.close-modal').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const target = btn.getAttribute('data-target');
+                if(target) {
+                    $(target).modal('hide');
+                }
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-close-modal').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const target = button.getAttribute('data-target');
+                if(target) {
+                    $(target).modal('hide');
+                }
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.close-error-modal').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                $('#errorModal').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-close-error').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                $('#errorModal').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-close-customerStatus').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                $('#customerStatus').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-close-unlockCustomerStatus').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                $('#unlockCustomerStatus').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-close-customerStatusList').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                $('#customerStatusList').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-close-unlockCustomerStatusList').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                $('#unlockCustomerStatusList').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-close-confirmUnlockModal').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                $('#confirmUnlockModal').modal('hide');
+            });
+        });
+    });
+</script>
 <c:import url="footer.jsp"/>
 
 <script src="${pageContext.request.contextPath}/managermentCustomer/searchCustomer.js"></script>

@@ -1,0 +1,50 @@
+.modal-custom {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 700px;
+    height: auto;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+.modal-center{
+    padding: 20px; text-align: center;
+}
+.modal-bottom{
+    padding: 20px; text-align: center;
+}
+.modal-h3{
+    margin: 0; color: #000; font-family: Arial, sans-serif; font-weight: bold;
+}
+.modal-body-font{
+    font-size: 16px; color: #555; line-height: 1.5;
+}
+.modal-marin-top{
+    margin-top: 20px;
+}
+#closeModalBtn {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.product-thumbnail {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 5px;
+}
+.height20{
+    height: 20px;
+}

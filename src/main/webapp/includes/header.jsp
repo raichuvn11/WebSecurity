@@ -7,13 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <html>
-<script src="../scripts/logout.js"></script>
+<script src="../scripts/logoutNew.js"></script>
   <!-- Start Header/Navigation -->
   <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 
     <div class="container">
-      <img class="navbar-brand" src="../images/logoFurni.png" alt="Furni Logo" style="height: 150px;">
+      <img class="navbar-brand" src="../images/logoFurni.png" alt="Furni Logo">
+      <style nonce="<%= cspNonce %>">
+        .navbar-brand {
+          height: 150px;
+        }
+      </style>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,7 +46,7 @@
             } else {
           %>
             <li>
-              <a class="nav-link" href="#" onclick="confirmLogout()">Đăng Xuất</a>
+              <a href="#" id="logoutLink" class="nav-link">Đăng Xuất</a>
             </li>
           <%
             }

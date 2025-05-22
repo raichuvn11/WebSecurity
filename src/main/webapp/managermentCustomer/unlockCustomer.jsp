@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
+<script nonce="<%= cspNonce %>">
     function unlockCustomer(customerId, status) {
         if (status !== 'InActive') {
             $('#unlockCustomerStatus').modal('show');

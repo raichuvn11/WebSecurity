@@ -106,7 +106,7 @@ public class ForgotPasswordServlet extends HttpServlet {
             else if( pass == null || confPass == null || pass.equals("") || confPass.equals("")){
                 request.setAttribute("message", "Vui lòng nhập đầy đủ");
             } else {
-                String passW = MaHoa.toSHA1(pass);
+                String passW = MaHoa.toSHA512(pass);
                 if(PersonDB.updatePassword(email, passW)){
                     request.setAttribute("message_success", "Đổi mật khẩu thành công");
                     session.removeAttribute("email");

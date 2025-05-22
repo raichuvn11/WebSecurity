@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,8 +79,20 @@
 <script src="<c:url value='/assets/js/jquery-3.6.0.min.js'/>"></script>
 <script src="<c:url value='/assets/js/bootstrap.bundle.min.js'/>"></script>
 <script src="<c:url value='/assets/js/script.js'/>"></script>
+<script nonce="<%= cspNonce %>">
+  (function(){
+    const originalCreateElement = document.createElement;
+    document.createElement = function(tagName) {
+      const el = originalCreateElement.call(document, tagName);
+      if (tagName.toLowerCase() === 'style') {
+        el.setAttribute('nonce', '<%= cspNonce %>');
+      }
+      return el;
+    }
+  })();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
+<script nonce="<%= cspNonce %>">
   const urlParams = new URLSearchParams(window.location.search);
   const success = urlParams.get('success');
   const error = urlParams.get('error');

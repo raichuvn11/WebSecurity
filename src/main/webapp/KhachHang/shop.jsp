@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,13 +53,22 @@
 <div class="untree_co-section product-section before-footer-section">
 	<div class="container">
 		<form id="formSearch" action="../shopServlet" method="POST" class="d-flex mb-3">
+			<style nonce="<%= cspNonce %>">
+				.custom-width-85 {
+					width: 85%;
+				}
+			</style>
+			<style nonce="<%= cspNonce %>">
+				.custom-width-10 {
+					width: 10%;
+				}
+			</style>
 			<input
 					type="text"
 					name="keyword"
 					value="${keyword}"
-					class="form-control me-2"
+					class="form-control me-2 custom-width-85"
 					placeholder="Nhập từ khóa tìm kiếm..."
-					style="width: 85%;"
 			>
 			<input
 					type="hidden"
@@ -80,9 +91,8 @@
 			>
 			<button
 					type="submit"
-					class="btn btn-primary"
+					class="btn btn-primary custom-width-10"
 					id="buttonSubmitSearch"
-					style="width: 10%;"
 			>
 				<i class="fas fa-search"></i>
 			</button>
@@ -142,11 +152,16 @@
 				<div class="row">
 					<c:forEach var="furniture" items="${listFurnitures}">
 						<div class="col-12 col-md-4 col-lg-3 mb-5">
-							<form action="../furnitureServlet" method="GET" style="display:inline;">
+							<style nonce="<%= cspNonce %>">
+								.inline-display {
+									display: inline;
+								}
+							</style>
+							<form action="../furnitureServlet" method="GET" class="inline-display">
 								<input type="hidden" name="furnitureId" value="${furniture.id}">
 								<input type="hidden" name="furnitureCategoryID" value="${furniture.category.id}">
 								<input type="hidden" name="action" value="fromShop">
-								<a href="javascript:void(0);" class="product-item" onclick="this.closest('form').submit();">
+								<a href="javascript:void(0);" class="product-item" role="button" tabindex="0">
 									<img src="data:image/png;base64,${furniture.representativeImage.base64Data}"
 										 alt="${furniture.representativeImage.fileName}"
 										 class="img-fluid product-thumbnail">
@@ -157,7 +172,7 @@
 								</a>
 							</form>
 							<!-- Form chứa nút submit -->
-							<form action="../PurchaseServlet" method="POST" class="btn-form" style="display:inline;">
+							<form action="../PurchaseServlet" method="POST" class="btn-form inline-display" >
 								<input type="hidden" name="furnitureID" value="${furniture.id}">
 								<input type="hidden" name="action" value="addtocart">
 								<button type="submit" class="btn-submit">
@@ -198,10 +213,34 @@
 <%-- Kiểm tra xem có thông báo nào không --%>
 <% String message = (String) request.getAttribute("message"); %>
 <% if (message != null) { %>
-<script type="text/javascript">
+<script nonce="<%= cspNonce %>" type="text/javascript">
 	alert("<%= message %>");
 </script>
 <% } %>
+
+<script nonce="<%= cspNonce %>">
+	document.querySelectorAll('.product-item').forEach(function(elem) {
+		elem.addEventListener('click', function(event) {
+			event.preventDefault();
+			const form = this.closest('form');
+			if (form) {
+				form.submit();
+			}
+		});
+
+		// (Tùy chọn) cho phép submit khi nhấn Enter nếu dùng tabindex trên thẻ <a>
+		elem.addEventListener('keypress', function(event) {
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				const form = this.closest('form');
+				if (form) {
+					form.submit();
+				}
+			}
+		});
+	});
+</script>
+
 <c:import url="../includes/footer.jsp" />
 
 <script src="js/bootstrap.bundle.min.js"></script>

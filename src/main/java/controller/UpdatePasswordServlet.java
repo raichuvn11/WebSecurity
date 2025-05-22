@@ -37,7 +37,7 @@ public class UpdatePasswordServlet extends HttpServlet {
             return;
         }
 
-        String hashedCurrentPassword = MaHoa.toSHA1(currentPassword);
+        String hashedCurrentPassword = MaHoa.toSHA512(currentPassword);
         if (!hashedCurrentPassword.equals(customer.getPassword())) {
             request.setAttribute("error", "Mật khẩu hiện tại không đúng.");
             request.getRequestDispatcher("/updatepassword.jsp").forward(request, response);
@@ -61,7 +61,7 @@ public class UpdatePasswordServlet extends HttpServlet {
             return;
         }
 
-        String hashedNewPassword = MaHoa.toSHA1(newPassword);
+        String hashedNewPassword = MaHoa.toSHA512(newPassword);
 
         boolean updateSuccess = customerDao.updatePassword(customer.getPersonID(), hashedNewPassword);
 

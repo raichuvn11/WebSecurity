@@ -1,3 +1,16 @@
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+<script nonce="<%= cspNonce %>">
+    (function(){
+        const originalCreateElement = document.createElement;
+        document.createElement = function(tagName) {
+            const el = originalCreateElement.call(document, tagName);
+            if (tagName.toLowerCase() === 'style') {
+                el.setAttribute('nonce', '<%= cspNonce %>');
+            }
+            return el;
+        }
+    })();
+</script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>

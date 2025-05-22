@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +15,7 @@
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
   />
-  <style>
+  <style nonce="<%= cspNonce %>">
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f9;
@@ -100,7 +102,7 @@
   </form>
 </div>
 
-<script>
+<script nonce="<%= cspNonce %>">
   function validateForm() {
     const currentPassword = document.getElementById("current-password").value;
     const newPassword = document.getElementById("new-password").value;

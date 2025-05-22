@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
             message = "Vui lòng nhập đủ thông tin";
         } else {
             if (role.equals("customer")) {
-                String passW = MaHoa.toSHA1(pass);
+                String passW = MaHoa.toSHA512(pass);
                 Customer customer = CustomerDB.getCustomerByEmailPass(email, passW);
                 if (customer == null || customer.getStatus().equals("InActive")) {
                     message = "Sai tài khoản hoặc mật khẩu";

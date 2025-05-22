@@ -24,8 +24,16 @@ public class ListStaffServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
+
+        // Kiểm tra phân quyền: chỉ cho phép owner (admin) truy cập
+        Object ownerObj = session.getAttribute("owner");
+        if (ownerObj == null) {
+            // Chưa đăng nhập hoặc không phải owner → redirect về trang login
+            response.sendRedirect(request.getContextPath() + "/KhachHang/login.jsp");
+            return;
+        }
+
         List<Staff> listStaff = (List<Staff>) session.getAttribute("listStaff");
         if (listStaff == null) {
             listStaff = StaffDAO.getAllStaffs();

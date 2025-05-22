@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="utils.LabelConverter" %>
-
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -212,7 +212,7 @@
                         <a class="dropdown-item" href="generalsettings.html"><i class="me-2"
                                                                                 data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="signin.html"><img src="assets/img/icons/log-out.svg"
+                        <a class="dropdown-item logout pb-0" href="${pageContext.request.contextPath}/LogoutServlet"><img src="assets/img/icons/log-out.svg"
                                                                                      class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
@@ -532,7 +532,7 @@
                     <%--///////////////////////////////////////////////////////////////////////////////////////////////////--%>
                     <%--///////////////////////////////////////////////////////////////////////////////////////////////////--%>
                     <%--///////////////////////////////////////////////////////////////////////////////////////////////////--%>
-                    <script>
+                    <script nonce="<%= cspNonce %>">
                         // trình tự cập nhật đúng
                         const statusTransitions = {
                             WAITING_PROCESS: ["DELIVERING", "CANCELED"],

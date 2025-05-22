@@ -2,10 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Danh sách đơn hàng";
         const listStaffElement = document.getElementById("list-category");
@@ -17,18 +19,120 @@
 
 <div class="page-wrapper">
     <div class="content">
+        <style nonce="<%= cspNonce %>">
+            .page-header{
+                display: flex; justify-content: space-between; align-items: flex-start; padding: 20px; border-bottom: 1px solid #ddd;
+            }
+            .customer-profile{display: flex; gap: 20px; align-items: stretch; height: auto;}
+            .img{
+                flex-shrink: 0; height: 200px; width: 180px; display: flex; align-items: stretch;
+            }
 
-        <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px; border-bottom: 1px solid #ddd;">
+            .avatar{
+                height: 100%; width: 100%; object-fit: cover; display: block;
+            }
+            .tittle{
+                text-align: right; margin-top: 20px;
+            }
+            .h4{
+                font-weight: bold; font-size: 1.8em; margin: 0; font-family: 'Poppins', sans-serif; color: #333;
+            }
+            .h6{
+                font-size: 1.1em; color: #777; margin: 5px 0 0; font-family: 'Roboto', sans-serif;
+            }
+            .search{
+                text-align: left; margin-bottom: 15px; padding: 10px; border-left: 5px solid #28a745; border-radius: 5px;
+            }
+            .search-title{
+                font-size: 1.2em; font-weight: 400; color: #4a4a4a; font-family: 'Poppins', sans-serif; font-style: italic; margin: 0;
+                padding: 8px 12px; display: flex; align-items: center; background-color: #f9fbfd; border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1); letter-spacing: 0.5px;
+            }
+            .margin-left{
+                margin-left: 10px;
+            }
+            .margin-bottom{
+                margin-bottom: 15px;
+            }
+            .margin-bottom0{
+                margin-bottom: 0;
+            }
+            .margin-top{
+                margin-top: 10px;
+            }
+            .category{
+                width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;
+            }
+            .td{
+                max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            }
+            .w90{
+                max-width: 90%; width: 90%;
+            }
+            .large-image{
+                width: 100%; max-height: 600px;
+            }
+            .form{
+                width: 100%;
+                padding: 10px;
+
+                border: 1px solid #ccc;
+                background-color: #f9f9f9;
+                font-size: 14px;
+                color: #333;
+                transition: all 0.3s ease;
+            }
+            .color{
+                color: #888;
+            }
+            .o1{
+                background-color: #d4edda; color: #155724;
+            }
+            .o2{
+                background-color: #fff3cd; color: #856404;
+            }
+            .o3{
+                background-color: #f8d7da; color: #721c24;
+            }
+            .o4{
+                background-color: #cce5ff; color: #004085;
+            }
+            .o5{
+                background-color: #d1ecf1; color: #0c5460;
+            }
+            .o6{
+                background-color: #e2e3e5; color: #6c757d;
+            }
+            .o7{
+                background-color: #d4edda; color: #155724;
+            }
+            .category-name{
+                white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;
+            }
+            .img-feedback-a{
+                display: inline-block; margin: 5px; cursor: pointer;
+            }
+            .img-feedback{
+                max-width: 100px; max-height: 100px; border: 1px solid #ccc;
+            }
+            .color-gold{
+                color: gold;
+            }
+            .color-lightgray{
+                color: lightgray;
+            }
+        </style>
+        <div class="page-header">
             <!-- Phần thông tin khách hàng -->
-            <div class="customer-profile" style="display: flex; gap: 20px; align-items: stretch; height: auto;">
+            <div class="customer-profile">
                 <!-- Ảnh đại diện -->
-                <div class="product-img" style="flex-shrink: 0; height: 200px; width: 180px; display: flex; align-items: stretch;">
+                <div class="product-img img" >
                     <c:choose>
                         <c:when test="${not empty customer.avatar}">
-                            <img src="data:image/jpeg;base64,${customer.avatar}" alt="Avatar" style="height: 100%; width: 100%; object-fit: cover; display: block;" />
+                            <img src="data:image/jpeg;base64,${customer.avatar}" alt="Avatar" class="avatar" />
                         </c:when>
                         <c:otherwise>
-                            <img src="https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg" alt="Avatar" style="height: 100%; width: 100%; object-fit: cover; display: block;" />
+                            <img src="https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg" alt="Avatar" class="avatar" />
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -59,9 +163,9 @@
             </div>
 
             <!-- Phần Quản lý đơn hàng -->
-            <div class="page-title" style="text-align: right; margin-top: 20px;">
-                <h4 style="font-weight: bold; font-size: 1.8em; margin: 0; font-family: 'Poppins', sans-serif; color: #333;">Quản Lý Đơn Hàng</h4>
-                <h6 style="font-size: 1.1em; color: #777; margin: 5px 0 0; font-family: 'Roboto', sans-serif;">Tìm kiếm/xem phản hồi/xem chi tiết đơn hàng</h6>
+            <div class="page-title tittle">
+                <h4 class="h4">Quản Lý Đơn Hàng</h4>
+                <h6 class="h6">Tìm kiếm/xem phản hồi/xem chi tiết đơn hàng</h6>
             </div>
         </div>
 
@@ -70,51 +174,38 @@
             <div class="card">
 
                 <div class="card-body">
-                    <div class="search-header"
-                         style="text-align: left; margin-bottom: 15px; padding: 10px; border-left: 5px solid #28a745; border-radius: 5px;">
-                        <h6 class="search-title"
-                            style="font-size: 1.2em; font-weight: 400; color: #4a4a4a; font-family: 'Poppins', sans-serif; font-style: italic; margin: 0;
-           padding: 8px 12px; display: flex; align-items: center; background-color: #f9fbfd; border-radius: 8px;
-           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1); letter-spacing: 0.5px;">
-                            🔍 <span style="margin-left: 10px;">Tìm Kiếm Đơn Hàng</span>
+                    <div class="search-header search">
+                        <h6 class="search-title ">
+                            🔍 <span class="margin-left">Tìm Kiếm Đơn Hàng</span>
                         </h6>
 
                     </div>
                     <div class="card-body pb-0">
                         <div class="row">
                             <input type="hidden" name="customerId" value="${searchOrder.customerId}" placeholder="Nhập mã khách hàng...">
-                            <div class="col-lg-2 col-sm-6 col-12" style="margin-bottom: 15px;">
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <input type="number" name="id" value="${searchOrder.id}" placeholder="Nhập mã sản phẩm..." style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                            <div class="col-lg-2 col-sm-6 col-12 margin-bottom">
+                                <div class="form-group margin-bottom0" >
+                                    <input type="number" name="id" value="${searchOrder.id}" placeholder="Nhập mã sản phẩm..." class="category">
                                 </div>
                             </div>
 
-                            <div class="col-lg-2 col-sm-6 col-12" style="margin-bottom: 15px;">
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <input type="date" name="orderDate" value="${searchOrder.orderDate}" class="form-control" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                            <div class="col-lg-2 col-sm-6 col-12 margin-bottom">
+                                <div class="form-group margin-bottom0" >
+                                    <input type="date" name="orderDate" value="${searchOrder.orderDate}" class="form-control category" >
                                 </div>
                             </div>
 
-                            <div class="col-lg-2 col-sm-6 col-12" style="margin-bottom: 15px;">
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <select name="status" class="form-control" style="
-                                        width: 100%;
-                                        padding: 10px;
-
-                                        border: 1px solid #ccc;
-                                        background-color: #f9f9f9;
-                                        font-size: 14px;
-                                        color: #333;
-                                        transition: all 0.3s ease;
-                                    ">
-                                        <option value="" style="color: #888;">Chọn trạng thái</option>
-                                        <option value="DELIVERING" ${searchOrder.status == 'Đang giao hàng' ? 'selected' : ''}  style="background-color: #d4edda; color: #155724;">Đang giao hàng</option>
-                                        <option value="WAITING_PROCESS" ${searchOrder.status == 'Đang chờ xử lý' ? 'selected' : ''} style="background-color: #fff3cd; color: #856404;">Đang chờ xử lý</option>
-                                        <option value="CANCELED" ${searchOrder.status == 'Đã hủy' ? 'selected' : ''} style="background-color: #f8d7da; color: #721c24;">Đã hủy</option>
-                                        <option value="DELIVERED" ${searchOrder.status == 'Đã giao hàng' ? 'selected' : ''} style="background-color: #cce5ff; color: #004085;">Đã giao hàng</option>
-                                        <option value="ACCEPTED" ${searchOrder.status == 'Đã chấp nhận' ? 'selected' : ''} style="background-color: #d1ecf1; color: #0c5460;">Đã chấp nhận</option>
-                                        <option value="REFUNDED" ${searchOrder.status == 'Đã hoàn trả' ? 'selected' : ''} style="background-color: #e2e3e5; color: #6c757d;">Đã hoàn trả</option>
-                                        <option value="FEEDBACKED" ${searchOrder.status == 'Đã nhận phản hồi' ? 'selected' : ''} style="background-color: #d4edda; color: #155724;">Đã nhận phản hồi</option>
+                            <div class="col-lg-2 col-sm-6 col-12 margin-bottom">
+                                <div class="form-group margin-bottom0">
+                                    <select name="status" class="form-control form">
+                                        <option value="" class="color">Chọn trạng thái</option>
+                                        <option value="DELIVERING" ${searchOrder.status == 'Đang giao hàng' ? 'selected' : ''}  class="o1">Đang giao hàng</option>
+                                        <option value="WAITING_PROCESS" ${searchOrder.status == 'Đang chờ xử lý' ? 'selected' : ''} class="o2">Đang chờ xử lý</option>
+                                        <option value="CANCELED" ${searchOrder.status == 'Đã hủy' ? 'selected' : ''} class="o3">Đã hủy</option>
+                                        <option value="DELIVERED" ${searchOrder.status == 'Đã giao hàng' ? 'selected' : ''} class="o4">Đã giao hàng</option>
+                                        <option value="ACCEPTED" ${searchOrder.status == 'Đã chấp nhận' ? 'selected' : ''} class="o5">Đã chấp nhận</option>
+                                        <option value="REFUNDED" ${searchOrder.status == 'Đã hoàn trả' ? 'selected' : ''} class="o6">Đã hoàn trả</option>
+                                        <option value="FEEDBACKED" ${searchOrder.status == 'Đã nhận phản hồi' ? 'selected' : ''} class="o7">Đã nhận phản hồi</option>
                                     </select>
                                 </div>
                             </div>
@@ -187,10 +278,19 @@
                                             </span>
                                     </td>
                                     <td>
-                                        <a class="me-3" onclick="viewFeedbackCustomer(${order.id})" title="Xem Phản Hồi">
-                                            <img src="${pageContext.request.contextPath}/assets/img/icons/edit.svg" alt="Edit">
+                                        <!-- Xem phản hồi -->
+                                        <a  href="javascript:void(0);"
+                                            class="me-3 btn-view-feedback"
+                                            data-order-id="${order.id}"
+                                            title="Xem Phản Hồi">
+                                        <img src="${pageContext.request.contextPath}/assets/img/icons/edit.svg" alt="Edit">
                                         </a>
-                                        <a class="me-3" onclick="viewListProduct(${order.id})" title="Xem Chi Tiết">
+
+                                        <!-- Xem chi tiết sản phẩm -->
+                                        <a  href="javascript:void(0);"
+                                            class="me-3 btn-view-product"
+                                            data-order-id="${order.id}"
+                                            title="Xem Chi Tiết">
                                             <img src="${pageContext.request.contextPath}/assets/img/icons/product.svg" alt="Product">
                                         </a>
                                     </td>
@@ -218,7 +318,7 @@
         <div class="modal-content" id="feedbackCustomer">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Phản Hồi Của Khách Hàng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#feedback').modal('hide')">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeFeedbackBtn">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -226,12 +326,12 @@
                 <p id="feedback-description"></p>
                 <div id="feedback-rate">
                 </div>
-                <div id="imageFeedback" style="margin-top: 10px;">
+                <div id="imageFeedback" class="margin-top">
                     <!-- Danh sách ảnh sẽ được thêm vào đây bằng JavaScript -->
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#feedback').modal('hide')">Hủy Thao Tác</button>
+                <button type="button" class="btn btn-secondary" id="cancelFeedbackBtn">Hủy Thao Tác</button>
             </div>
         </div>
     </div>
@@ -239,11 +339,11 @@
 
 
 <div class="modal fade" id="productOfOrderList" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document" style="max-width: 90%; width: 90%;">
+    <div class="modal-dialog modal-xl w90" role="document" >
         <div class="modal-content" id="orderModalContent">
             <div class="modal-header" id="orderModalHeader">
                 <h5 class="modal-title" id="modalTitle">Chi Tiết Hóa Đơn</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#productOfOrderList').modal('hide')">
+                <button type="button" class="close btn-close-product-order-list" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -294,7 +394,7 @@
                 </div>
             </div>
             <div class="modal-footer" id="orderModalFooter">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#productOfOrderList').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-secondary btn-close-product-order-list" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
@@ -307,13 +407,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="imageModalLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#imageModal').modal('hide')">
+                <button type="button" class="close btn-close-image-modal" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <!-- Ảnh lớn sẽ hiển thị ở đây -->
-                <img id="largeImage" src="" alt="Large Feedback Image" style="width: 100%; max-height: 600px;"/>
+                <img id="largeImage" src="" alt="Large Feedback Image" class="large-image"/>
             </div>
         </div>
     </div>
@@ -324,7 +424,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="thu">Phản hồi từ khách hàng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#feedbackNull').modal('hide')">
+                <button type="button" class="close btn-close-feedback-null" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times; </span>
                 </button>
             </div>
@@ -333,7 +433,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#feedbackNull').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger btn-close-feedback-null">Đóng</button>
             </div>
         </div>
     </div>
@@ -344,7 +444,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="thu1">Chi Tiết Hóa Đơn </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#orderNull').modal('hide')">
+                <button type="button" class="close close-modal-btn" data-target="#orderNull" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times; </span>
                 </button>
             </div>
@@ -353,7 +453,7 @@
                 <br>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="$('#orderNull').modal('hide')">Đóng</button>
+                <button type="button" class="btn btn-danger close-modal-btn" data-target="#orderNull">Đóng</button>
             </div>
         </div>
     </div>
@@ -371,8 +471,8 @@
 <%--<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>--%>
 <%--<script src="${pageContext.request.contextPath}/https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>--%>
 <%--<script src="${pageContext.request.contextPath}/https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>--%>
-<c:import url="footer.jsp"/>
 
+<c:import url="footer.jsp"/>
 <script src="${pageContext.request.contextPath}/ordercustomer/pageorderCustomer.js"></script>
 <script src="${pageContext.request.contextPath}/ordercustomer/loadAndSearchOrder.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/ordercustomer/customer.css">
@@ -380,3 +480,71 @@
 
 <jsp:include page="${pageContext.request.contextPath}/ordercustomer/loadFeedback.jsp"></jsp:include>
 <jsp:include page="${pageContext.request.contextPath}/ordercustomer/loadProductOfOrder.jsp"></jsp:include>
+
+<script nonce="<%= cspNonce %>">
+    document.addEventListener('DOMContentLoaded', function () {
+        /* Xem phản hồi */
+        document.querySelectorAll('.btn-view-feedback').forEach(function (link) {
+            link.addEventListener('click', function () {
+                const orderId = link.getAttribute('data-order-id');
+                viewFeedbackCustomer(orderId);
+            });
+        });
+
+        /* Xem chi tiết sản phẩm */
+        document.querySelectorAll('.btn-view-product').forEach(function (link) {
+            link.addEventListener('click', function () {
+                const orderId = link.getAttribute('data-order-id');
+                viewListProduct(orderId);
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const closeFeedbackBtn = document.getElementById('closeFeedbackBtn');
+        if (closeFeedbackBtn) {
+            closeFeedbackBtn.addEventListener('click', function () {
+                $('#feedback').modal('hide');
+            });
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const cancelBtn = document.getElementById('cancelFeedbackBtn');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', function () {
+                $('#feedback').modal('hide');
+            });
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-close-product-order-list').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                $('#productOfOrderList').modal('hide');
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-close-image-modal').forEach(function (button) {
+            button.addEventListener('click', function () {
+                $('#imageModal').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-close-feedback-null').forEach(function (button) {
+            button.addEventListener('click', function () {
+                $('#feedbackNull').modal('hide');
+            });
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.close-modal-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const modalId = btn.getAttribute('data-target');
+                if (modalId) {
+                    $(modalId).modal('hide');
+                }
+            });
+        });
+    });
+</script>

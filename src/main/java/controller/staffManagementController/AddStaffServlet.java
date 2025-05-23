@@ -29,6 +29,13 @@ public class AddStaffServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        // Kiểm tra cookie
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("owner") == null) {
+            response.sendRedirect(request.getContextPath() + "KhachHang/login.jsp");
+            return;
+        }
+
         String name = request.getParameter("emp-name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
@@ -53,7 +60,7 @@ public class AddStaffServlet extends HttpServlet {
             try{
                 Staff staff = new Staff(name, birthDate, address, email, password, phone, avatarBytes, salary, workDate);
                 StaffDAO.insert(staff);
-                HttpSession session = request.getSession();
+                //HttpSession session = request.getSession();
                 List<Staff> listStaff = (List<Staff>) session.getAttribute("listStaff");
                 listStaff.add(staff);
                 session.setAttribute("listStaff", listStaff);

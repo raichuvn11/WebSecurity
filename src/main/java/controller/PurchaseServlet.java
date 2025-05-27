@@ -7,6 +7,7 @@ import VietQR.QRCodeResponse;
 import business.*;
 import config.UtilsEmail;
 import data.*;
+import ultil.LoggerUtil;
 
 import javax.servlet.*;
 
@@ -19,11 +20,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 @WebServlet(name = "PurchaseServlet", value = "/PurchaseServlet")
 public class PurchaseServlet extends HttpServlet {
+    private static final Logger logger = LoggerUtil.getLogger();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("doGet called - redirecting to doPost");
         doPost(request, response);
     }
 
@@ -32,12 +37,22 @@ public class PurchaseServlet extends HttpServlet {
         String url = "/KhachHang/cart.jsp";
         ServletContext sc = getServletContext();
         String action = request.getParameter("action");
+
+        // Lấy IP của client
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
         if(action == null) {
             action = "viewcart";
         }
+
         HttpSession session = request.getSession(); // không tạo sesion mới nếu có
         Customer customer = (Customer) session.getAttribute("customer");
+
         if(customer == null) {
+            logger.warning("Thiếu thông tin đăng nhập từ người dùng. IP: " + ipAddress);
             url = "/KhachHang/login.jsp";
             sc.getRequestDispatcher(url).forward(request, response);
             return;  // Dừng thực thi ở đây
@@ -50,8 +65,10 @@ public class PurchaseServlet extends HttpServlet {
             boolean check = CartDB.addToCart(customer, fur);
             if (check) {
                 request.setAttribute("message", "Thêm thành công!");
+                logger.info("Thêm vào giỏ hàng thành công. KH: " + customer.getPersonID() + "IP: " + ipAddress);
             } else {
                 request.setAttribute("message", "Sản phẩm đã có trong giỏ hàng!");
+                logger.info("Thêm vào giỏ hàng thành công. KH: " + customer.getPersonID() + "IP: " + ipAddress);
             }
             sc.getRequestDispatcher(url).forward(request, response);
         } else if (action.equals("viewcart")) {
@@ -72,6 +89,7 @@ public class PurchaseServlet extends HttpServlet {
             request.setAttribute("listFurniture", cart.getListFurniture());
             sc.getRequestDispatcher(url).forward(request, response);
         } else if (action.equals("purchase")) { // thiếu coupon !! sửa ở đây
+            logger.info("Khách hàng mua hàng: KH: " + customer.getPersonID() + "IP: " + ipAddress);
             url = "/KhachHang/checkout.jsp";
             String listID = request.getParameter("listFurnitureID"); //Toàn bộ tên được chọn
             if (listID != null && !listID.isEmpty()) {

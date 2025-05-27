@@ -2,7 +2,12 @@ package business;
 
 import ENumeration.EFurnitureStatus;
 
+<<<<<<< HEAD
 import javax.persistence.*;
+=======
+import jakarta.persistence.*;
+
+>>>>>>> master
 
 import java.io.Serializable;
 import java.text.DecimalFormat;

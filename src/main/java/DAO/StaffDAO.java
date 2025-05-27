@@ -4,8 +4,13 @@ import data.DBUtil;
 import business.Shift;
 import business.Staff;
 
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+=======
+import jakarta.persistence.*;
+
+>>>>>>> master
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;

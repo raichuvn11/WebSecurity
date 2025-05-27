@@ -12,7 +12,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+<<<<<<< HEAD
       <module name="FurnitureShop_11_11_14h" options="-endorseddirs D:\ki2nam3\baomatweb\WebSecurity\target/endorsed" />
+=======
+      <module name="FurnitureShop_11_11_14h" options="-endorseddirs E:\WebSecurity-main\target/endorsed" />
+>>>>>>> master
     </option>
   </component>
 </project>

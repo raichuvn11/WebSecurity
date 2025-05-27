@@ -3,10 +3,16 @@ package DAO;
 import business.Coupon;
 import data.DBUtil;
 
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 import javax.persistence.*;
+=======
+import java.util.List;
+import jakarta.persistence.*;
+
+>>>>>>> master
 
 import business.Category;
 

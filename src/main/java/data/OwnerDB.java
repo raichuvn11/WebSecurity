@@ -3,9 +3,14 @@ package data;
 import business.Customer;
 import business.Owner;
 
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+=======
+import jakarta.persistence.*;
+
+>>>>>>> master
 
 public class OwnerDB {
     public static Owner getOwnerByEmailPass(String email, String password) {

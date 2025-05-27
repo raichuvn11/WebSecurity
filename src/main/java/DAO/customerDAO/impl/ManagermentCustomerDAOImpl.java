@@ -7,9 +7,13 @@ import DTO.customerDTO.requestDTO.CustomerRequestDTO;
 import business.Customer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.persistence.*;
 =======
 import jakarta.persistence.*;
+>>>>>>> master
+=======
+import javax.persistence.*;
 >>>>>>> master
 import java.lang.reflect.Type;
 import java.util.List;

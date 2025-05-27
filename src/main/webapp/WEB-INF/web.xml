@@ -9,15 +9,21 @@
         </session-timeout>
     </session-config>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
     <welcome-file-list>
         <welcome-file>indexServlet</welcome-file>
     </welcome-file-list>
 
+<<<<<<< HEAD
 =======
     <welcome-file-list>
         <welcome-file>indexServlet</welcome-file>
     </welcome-file-list>
+>>>>>>> master
+=======
 >>>>>>> master
     <filter>
         <filter-name>Set Character Encoding</filter-name>
@@ -28,16 +34,24 @@
         </init-param>
     </filter>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+>>>>>>> master
+=======
+
 >>>>>>> master
     <filter-mapping>
         <filter-name>Set Character Encoding</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+>>>>>>> master
+=======
+
 >>>>>>> master
     <servlet>
         <servlet-name>CouponController</servlet-name>
@@ -49,6 +63,9 @@
         <url-pattern>/CouponController</url-pattern>
     </servlet-mapping>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
     <!-- CORS Filter -->
     <filter>
@@ -58,6 +75,7 @@
 
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
+<<<<<<< HEAD
 =======
     <filter>
         <filter-name>CsrfTokenGeneratorFilter</filter-name>
@@ -74,6 +92,8 @@
     </filter>
     <filter-mapping>
         <filter-name>CsrfProtectionFilter</filter-name>
+>>>>>>> master
+=======
 >>>>>>> master
         <url-pattern>/*</url-pattern>
     </filter-mapping>

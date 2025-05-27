@@ -3,15 +3,21 @@ package DAO;
 import business.*;
 import business.Person;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+<<<<<<< HEAD
 =======
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+>>>>>>> master
+=======
 >>>>>>> master
 
 import java.sql.Connection;

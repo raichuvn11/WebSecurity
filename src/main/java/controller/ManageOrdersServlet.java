@@ -11,6 +11,7 @@ import data.OrderDB;
 import data.FeedbackDB;
 import data.PaymentDB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.json.JSONArray;
 import org.json.JSONObject;
 =======
@@ -18,6 +19,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+>>>>>>> master
+=======
+import org.json.JSONArray;
+import org.json.JSONObject;
 >>>>>>> master
 
 import javax.servlet.ServletException;
@@ -32,9 +37,12 @@ import java.util.*;
 @WebServlet(name = "ManageOrdersServlet", value = "/manageOrdersServlet")
 public class ManageOrdersServlet extends HttpServlet {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+>>>>>>> master
+=======
 >>>>>>> master
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,6 +91,9 @@ public class ManageOrdersServlet extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
             // Create a simple JSON object for feedback
             JSONObject jsonResponse = new JSONObject();
 
@@ -99,6 +110,7 @@ public class ManageOrdersServlet extends HttpServlet {
 
             // Write the JSON response
             response.getWriter().write(jsonResponse.toString());
+<<<<<<< HEAD
 =======
             // Create JSON response using Jackson
             ObjectNode jsonResponse = objectMapper.createObjectNode();
@@ -113,6 +125,8 @@ public class ManageOrdersServlet extends HttpServlet {
 
             // Write the JSON response
             response.getWriter().write(objectMapper.writeValueAsString(jsonResponse));
+>>>>>>> master
+=======
 >>>>>>> master
         }
     }
@@ -173,6 +187,9 @@ public class ManageOrdersServlet extends HttpServlet {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
         // Parse JSON thành đối tượng JSONObject
         String json = jsonBuilder.toString();
         JSONObject feedbackData = new JSONObject(json);
@@ -187,6 +204,7 @@ public class ManageOrdersServlet extends HttpServlet {
 
             // Chuyển đổi JSONArray thành danh sách ImageFeedback
             List<ImageFeedback> imageFeedbackList = convertJSONArrayToImageFeedbackList(imageFeedbacks);
+<<<<<<< HEAD
 =======
         // Parse JSON using Jackson
         String json = jsonBuilder.toString();
@@ -203,6 +221,8 @@ public class ManageOrdersServlet extends HttpServlet {
             // Chuyển đổi ArrayNode thành danh sách ImageFeedback
             List<ImageFeedback> imageFeedbackList = convertArrayNodeToImageFeedbackList(imageFeedbacks);
 >>>>>>> master
+=======
+>>>>>>> master
 
             Feedback feedback = new Feedback(
                     CustomerDB.getCustomer(customerId),
@@ -213,11 +233,16 @@ public class ManageOrdersServlet extends HttpServlet {
             );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             for (int i = 0; i < imageFeedbacks.length(); i++) {
                 String base64Image = imageFeedbacks.getString(i);
 =======
             for (int i = 0; i < imageFeedbacks.size(); i++) {
                 String base64Image = imageFeedbacks.get(i).asText();
+>>>>>>> master
+=======
+            for (int i = 0; i < imageFeedbacks.length(); i++) {
+                String base64Image = imageFeedbacks.getString(i);
 >>>>>>> master
                 System.out.println("Image " + (i + 1) + ": " + base64Image.substring(0, 50) + "..."); // Print first 50 chars
             }
@@ -235,20 +260,27 @@ public class ManageOrdersServlet extends HttpServlet {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
     private List<ImageFeedback> convertJSONArrayToImageFeedbackList(JSONArray imageFeedbacks) {
         List<ImageFeedback> imageFeedbackList = new ArrayList<>();
 
         if (imageFeedbacks == null || imageFeedbacks.length() == 0) {
+<<<<<<< HEAD
 =======
     private List<ImageFeedback> convertArrayNodeToImageFeedbackList(ArrayNode imageFeedbacks) {
         List<ImageFeedback> imageFeedbackList = new ArrayList<>();
 
         if (imageFeedbacks == null || imageFeedbacks.size() == 0) {
 >>>>>>> master
+=======
+>>>>>>> master
             System.out.println("Image feedback array is empty or null.");
             return imageFeedbackList;
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         for (int i = 0; i < imageFeedbacks.length(); i++) {
             try {
@@ -257,6 +289,11 @@ public class ManageOrdersServlet extends HttpServlet {
         for (int i = 0; i < imageFeedbacks.size(); i++) {
             try {
                 String base64Image = imageFeedbacks.get(i).asText();
+>>>>>>> master
+=======
+        for (int i = 0; i < imageFeedbacks.length(); i++) {
+            try {
+                String base64Image = imageFeedbacks.getString(i);
 >>>>>>> master
 
                 // Loại bỏ phần tiền tố "data:image/jpeg;base64," nếu có

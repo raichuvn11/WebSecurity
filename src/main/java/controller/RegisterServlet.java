@@ -38,11 +38,14 @@ public class RegisterServlet extends HttpServlet {
             messageDK = "Vui lòng nhập đúng định dạng email";
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         else if(ValidationUtils.validatePassword(password) != null){
             url = "/KhachHang/login.jsp";
             messageDK = ValidationUtils.validatePassword(password);
         }
+>>>>>>> master
+=======
 >>>>>>> master
         else if (CustomerDB.emailExists(email)){
             url = "/KhachHang/login.jsp";
@@ -59,8 +62,12 @@ public class RegisterServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath()+url);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+>>>>>>> master
+=======
+
 >>>>>>> master
     }
 

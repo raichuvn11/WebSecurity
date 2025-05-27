@@ -4,14 +4,20 @@ import business.Coupon;
 import data.DBUtil;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 import javax.persistence.*;
+<<<<<<< HEAD
 =======
 import java.util.List;
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
 >>>>>>> master
 
 import business.Category;

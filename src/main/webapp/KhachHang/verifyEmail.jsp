@@ -12,8 +12,11 @@
     <h1>Xác Thực OTP</h1>
     <form action="../verifyServlet" method="post">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
+=======
 >>>>>>> master
         <input type="hidden" name="action" value="send">
         <input type="email" name="email" value="${customerInfor.email}" required />
@@ -34,9 +37,13 @@
     %>
 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script src="../js/script.js"></script>
 =======
 <script src="./js/script.js"></script>
+>>>>>>> master
+=======
+<script src="../js/script.js"></script>
 >>>>>>> master
 </body>
 </html>

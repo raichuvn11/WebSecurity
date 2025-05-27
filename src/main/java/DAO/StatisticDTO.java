@@ -3,11 +3,16 @@ import ENumeration.EOrderStatus;
 import business.*;
 import data.DBUtil;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 >>>>>>> master
 import java.util.Collections;
 import java.util.List;

@@ -3,10 +3,14 @@ package business;
 import ENumeration.EFurnitureStatus;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.persistence.*;
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
+import javax.persistence.*;
 >>>>>>> master
 
 import java.io.Serializable;

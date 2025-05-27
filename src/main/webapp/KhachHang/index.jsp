@@ -13,17 +13,23 @@
 
 	<!-- Bootstrap CSS -->
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../css/all.min.css" rel="stylesheet">
 	<link href="../css/tiny-slider.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="../css/swiper-bundle.min.css">
+<<<<<<< HEAD
 =======
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<link href="css/tiny-slider.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+>>>>>>> master
+=======
 >>>>>>> master
 	<title>Home Page</title>
 </head>
@@ -71,10 +77,14 @@
 							<c:forEach var="Furniture" items="${listFurniture}">
 								<div class="swiper-slide">
 <<<<<<< HEAD
+<<<<<<< HEAD
 									<form action="../furnitureServlet" method="POST" style="display:inline;">
 =======
 									<form action="../furnitureServlet" method="GET" style="display:inline;">
 <%--										<input type="hidden" name="csrfToken" value="${csrfToken}">--%>
+>>>>>>> master
+=======
+									<form action="../furnitureServlet" method="POST" style="display:inline;">
 >>>>>>> master
 										<input type="hidden" name="furnitureId" value="${Furniture.id}">
 										<input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
@@ -118,9 +128,13 @@
 							<c:forEach var="Furniture" items="${listFurnitureNew}">
 								<div class="swiper-slide">
 <<<<<<< HEAD
+<<<<<<< HEAD
 									<form action="../furnitureServlet" method="POST" style="display:inline;">
 =======
 									<form action="../furnitureServlet" method="GET" style="display:inline;">
+>>>>>>> master
+=======
+									<form action="../furnitureServlet" method="POST" style="display:inline;">
 >>>>>>> master
 										<input type="hidden" name="furnitureId" value="${Furniture.id}">
 										<input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
@@ -270,10 +284,15 @@
 <script src="../js/tiny-slider.js"></script>
 <script src="../js/custom.js"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%--<script src="https://unpkg.com/swiper/swiper-bundle.min.js" integrity="sha384-cSxUTLgmloIEEwkAGghNE/gvxf8M62KcJJqltN1BzkBDqlJGkBqW3LzPVepQ+oRN" crossorigin="anonymous"></script>--%>
 <script src="../js/swiper-bundle.min.js"></script>
 =======
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+>>>>>>> master
+=======
+<%--<script src="https://unpkg.com/swiper/swiper-bundle.min.js" integrity="sha384-cSxUTLgmloIEEwkAGghNE/gvxf8M62KcJJqltN1BzkBDqlJGkBqW3LzPVepQ+oRN" crossorigin="anonymous"></script>--%>
+<script src="../js/swiper-bundle.min.js"></script>
 >>>>>>> master
 <script src="../js/furniture.js"></script>
 </body>

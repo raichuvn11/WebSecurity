@@ -9,10 +9,14 @@ import javax.servlet.annotation.*;
 
 import java.io.IOException;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.logging.Logger;
 =======
 import java.util.HashMap;
 import java.util.Map;
+>>>>>>> master
+=======
+import java.util.logging.Logger;
 >>>>>>> master
 
 import business.Customer;
@@ -23,16 +27,24 @@ import data.CustomerDB;
 import data.StaffDB;
 import data.OwnerDB;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import ultil.LoggerUtil;
 =======
+>>>>>>> master
+=======
+import ultil.LoggerUtil;
 >>>>>>> master
 import utils.MaHoa;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
 <<<<<<< HEAD
+<<<<<<< HEAD
     private  static final Logger logger = LoggerUtil.getLogger();
 =======
+>>>>>>> master
+=======
+    private  static final Logger logger = LoggerUtil.getLogger();
 >>>>>>> master
 
     @Override
@@ -40,10 +52,14 @@ public class LoginServlet extends HttpServlet {
         doPost(request, response);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     private static final Map<String, Integer> loginAttempts = new HashMap<>();
     private static final int MAX_ATTEMPTS = 5;
+>>>>>>> master
+=======
+
 >>>>>>> master
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,10 +71,14 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
         // Lấy IP của client
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
         if (ipAddress == null) {
             ipAddress = request.getRemoteAddr();
+<<<<<<< HEAD
 =======
         // Kiểm tra nếu bị quá số lần sai
         if (loginAttempts.containsKey(email) && loginAttempts.get(email) >= MAX_ATTEMPTS) {
@@ -67,13 +87,19 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + url);
             return;
 >>>>>>> master
+=======
+>>>>>>> master
         }
 
         if (email == null || email.equals("") || pass == null || pass.equals("")) {
             message = "Vui lòng nhập đủ thông tin";
 <<<<<<< HEAD
+<<<<<<< HEAD
             logger.warning("Thiếu thông tin đăng nhập từ người dùng. IP: " + ipAddress);
 =======
+>>>>>>> master
+=======
+            logger.warning("Thiếu thông tin đăng nhập từ người dùng. IP: " + ipAddress);
 >>>>>>> master
         } else {
             if (role.equals("customer")) {
@@ -81,6 +107,7 @@ public class LoginServlet extends HttpServlet {
                 Customer customer = CustomerDB.getCustomerByEmailPass(email, passW);
                 if (customer == null || customer.getStatus().equals("InActive")) {
                     message = "Sai tài khoản hoặc mật khẩu";
+<<<<<<< HEAD
 <<<<<<< HEAD
                     logger.warning("Đăng nhập KH thất bại: " + email + ", IP: " + ipAddress);
                 } else {
@@ -91,6 +118,10 @@ public class LoginServlet extends HttpServlet {
                     // Đăng nhập thành công: xóa số lần sai
                     loginAttempts.remove(email);
 >>>>>>> master
+=======
+                    logger.warning("Đăng nhập KH thất bại: " + email + ", IP: " + ipAddress);
+                } else {
+>>>>>>> master
                     session.setAttribute("customer", customer);
 
                     String displayName = customer.getName();
@@ -99,9 +130,14 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("displayEmail", displayEmail);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     logger.info("Khách hàng đăng nhập thành công: " + displayEmail + ", IP: " + ipAddress);
 
 =======
+>>>>>>> master
+=======
+                    logger.info("Khách hàng đăng nhập thành công: " + displayEmail + ", IP: " + ipAddress);
+
 >>>>>>> master
                     if (!isProfileCompleteCus(customer)) {
                         url = "/KhachHang/saveProfile.jsp";
@@ -114,12 +150,17 @@ public class LoginServlet extends HttpServlet {
                 if (staff == null || staff.getStatus().equals("InActive")) {
                     message = "Sai tài khoản hoặc mật khẩu";
 <<<<<<< HEAD
+<<<<<<< HEAD
                     logger.warning("Đăng nhập Nhân viên thất bại: " + email + ", IP: " + ipAddress);
                 } else {
 =======
                     loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
                 } else {
                     loginAttempts.remove(email);
+>>>>>>> master
+=======
+                    logger.warning("Đăng nhập Nhân viên thất bại: " + email + ", IP: " + ipAddress);
+                } else {
 >>>>>>> master
                     session.setAttribute("staff", staff);
 
@@ -129,9 +170,14 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("displayEmail", displayEmail);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     logger.info("Nhân viên đăng nhập thành công: " + staff.getEmail() + ", IP: " + ipAddress);
 
 =======
+>>>>>>> master
+=======
+                    logger.info("Nhân viên đăng nhập thành công: " + staff.getEmail() + ", IP: " + ipAddress);
+
 >>>>>>> master
                     if (!isProfileCompleteSta(staff)) {
                         url = "/KhachHang/saveProfile.jsp";
@@ -144,23 +190,33 @@ public class LoginServlet extends HttpServlet {
                 if (owner == null) {
                     message = "Sai tài khoản hoặc mật khẩu";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
                     logger.warning("Đăng nhập Chủ sở hữu thất bại: " + email + ", IP: " + ipAddress);
                 } else {
                     session.setAttribute("owner", owner);
                     logger.info("Chủ sở hữu đăng nhập thành công: " + owner.getEmail() + ", IP: " + ipAddress);
+<<<<<<< HEAD
 =======
                     loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
                 } else {
                     loginAttempts.remove(email);
                     session.setAttribute("owner", owner);
 >>>>>>> master
+=======
+>>>>>>> master
                     url = "/listStaff";
                 }
             } else {
                 message = "Vui lòng chọn vai trò của bạn";
 <<<<<<< HEAD
+<<<<<<< HEAD
                 logger.warning("Người dùng không chọn vai trò khi đăng nhập. IP: " + ipAddress);
 =======
+>>>>>>> master
+=======
+                logger.warning("Người dùng không chọn vai trò khi đăng nhập. IP: " + ipAddress);
 >>>>>>> master
             }
         }
@@ -169,9 +225,14 @@ public class LoginServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + url);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
+>>>>>>> master
+=======
+
+
 >>>>>>> master
     /**
      */

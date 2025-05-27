@@ -31,8 +31,11 @@
             <div class="card-body">
                 <form action="${pageContext.request.contextPath}/addStaff" method="post" enctype="multipart/form-data">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                     <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
+=======
 >>>>>>> master
                     <div class="row">
                         <c:if test="${not empty message}">

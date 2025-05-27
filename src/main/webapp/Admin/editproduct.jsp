@@ -22,6 +22,10 @@
       </div>
 
       <form id="furnitureForm" action="product-controller" method="post" enctype="multipart/form-data">
+<<<<<<< HEAD
+=======
+        <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
         <div class="card">
           <div class="card-body">
             <div class="row">

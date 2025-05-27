@@ -1,6 +1,11 @@
 package business;
 
+<<<<<<< HEAD
 import javax.persistence.Entity;
+=======
+import jakarta.persistence.*;
+
+>>>>>>> master
 
 
 @Entity

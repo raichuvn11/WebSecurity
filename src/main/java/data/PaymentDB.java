@@ -5,9 +5,14 @@ import business.Coupon;
 import business.Order;
 import business.Payment;
 
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+=======
+import jakarta.persistence.*;
+
+>>>>>>> master
 import java.util.Date;
 
 public class PaymentDB {

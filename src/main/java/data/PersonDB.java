@@ -2,10 +2,15 @@ package data;
 
 import business.Customer;
 
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+=======
+import jakarta.persistence.*;
+
+>>>>>>> master
 import business.Staff;
 import business.Customer;
 import business.Owner;

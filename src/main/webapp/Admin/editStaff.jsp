@@ -30,6 +30,10 @@
         <div class="card">
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
+<<<<<<< HEAD
+=======
+                    <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
                     <input type="hidden" name="emp-id" value="${staff.personID}">
                     <div class="row">
                         <c:if test="${not empty message}">

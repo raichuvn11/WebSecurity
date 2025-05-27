@@ -1,13 +1,5 @@
 package config;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import org.modelmapper.ModelMapper;
-=======
->>>>>>> master
-=======
-import org.modelmapper.ModelMapper;
->>>>>>> master
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -18,15 +10,7 @@ public class ModelMapperConfig implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         // Khởi tạo ModelMapper và lưu trữ vào ServletContext
-<<<<<<< HEAD
-<<<<<<< HEAD
-        ModelMapper modelMapper = new ModelMapper();
-=======
         ModelMapperConfig modelMapper = new ModelMapperConfig();
->>>>>>> master
-=======
-        ModelMapper modelMapper = new ModelMapper();
->>>>>>> master
         ServletContext context = sce.getServletContext();
         context.setAttribute("modelMapper", modelMapper);
     }

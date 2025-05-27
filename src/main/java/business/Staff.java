@@ -3,17 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this
  */
 package business;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-import javax.persistence.*;
-=======
 import jakarta.persistence.*;
 
->>>>>>> master
-=======
-import javax.persistence.*;
->>>>>>> master
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;

@@ -78,13 +78,9 @@
 	<div class="container">
 		<div class="row mb-5">
 			<form class="col-md-12" method="post">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 				<input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
 				<div class="site-blocks-table">
 					<table class="table">
 						<thead>

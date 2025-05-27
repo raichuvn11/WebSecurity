@@ -24,13 +24,9 @@
         <div class="card">
             <div class="card-body">
                 <form action="" method="post">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
                     <input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
                     <input type="hidden" name="month" value="${currentMonth}">
                     <input type="hidden" name="year" value="${currentYear}">
                     <div class="row">

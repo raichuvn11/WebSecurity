@@ -3,21 +3,7 @@ package DAO.customerDAO.ProfileDAO;
 import data.DBUtil;
 
 import business.Staff;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import javax.persistence.EntityTransaction;
-<<<<<<< HEAD
-=======
 import jakarta.persistence.*;
-
->>>>>>> master
-=======
->>>>>>> master
 
 public class StaffDao2 {
     public Staff getStaffById(Long id) { // Chuyển đổi tham số thành Long

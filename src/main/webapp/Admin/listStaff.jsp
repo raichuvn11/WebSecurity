@@ -40,15 +40,14 @@
                                 <span><img src="assets/img/icons/closes.svg" alt="img"></span>
                             </a>
                         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
                         <form action="${pageContext.request.contextPath}/searchStaff" method="post" class="d-flex justify-content-center">
-=======
+
                         <form action="${pageContext.request.contextPath}/searchStaff" method="get" class="d-flex justify-content-center">
->>>>>>> master
-=======
+
                         <form action="${pageContext.request.contextPath}/searchStaff" method="post" class="d-flex justify-content-center">
->>>>>>> master
+
                             <input type="text" class="form-control" name="search-name" value="${searchName}" placeholder="Nhập tên tìm kiếm..." style="margin-right: 5px;">
                             <button type="submit" name="search-action" value="search-name" class="btn btn-filters ms-auto">
                                 <img src="assets/img/icons/search-whites.svg" alt="img">

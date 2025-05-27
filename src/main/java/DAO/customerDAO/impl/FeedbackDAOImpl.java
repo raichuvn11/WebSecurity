@@ -5,21 +5,8 @@ package DAO.customerDAO.impl;
 import DAO.customerDAO.IFeedbackDAO;
 import business.Feedback;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-<<<<<<< HEAD
-=======
 import jakarta.persistence.*;
 
->>>>>>> master
-=======
->>>>>>> master
 
 public class FeedbackDAOImpl implements IFeedbackDAO {
     private EntityManagerFactory emf;

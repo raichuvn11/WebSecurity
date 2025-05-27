@@ -13,7 +13,13 @@
 
 	<!-- Bootstrap CSS -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
+
 	<link href="../css/all.min.css" rel="stylesheet">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link href="../css/all.min.css" rel="stylesheet">
+
 	<link href="../css/tiny-slider.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="../css/cart.css" rel="stylesheet">
@@ -49,6 +55,9 @@
 	<div class="container">
 		<div class="row mb-5">
 			<form class="col-md-12" method="post" action="../PurchaseServlet">
+
+				<input type="hidden" name="csrfToken" value="${csrfToken}">
+
 				<div class="site-blocks-table">
 					<table class="table">
 						<thead>
@@ -105,7 +114,10 @@
 			<div class="col-md-6">
 				<div class="row mb-5">
 					<div class="col-md-6">
-						<form action="../shopServlet" method="POST" style="display:inline;">
+
+
+
+						<form action="../shopServlet" method="GET" style="display:inline;">
 							<button class="btn btn-outline-black btn-sm btn-block">Tiếp tục mua sắm</button>
 						</form>
 					</div>
@@ -117,6 +129,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<form action="../PurchaseServlet" method="POST" style="display:inline;" id="purchaseForm">
+									<input type="hidden" name="csrfToken" value="${csrfToken}">
+
 									<input type="hidden" name="action" value="purchase">
 									<button id="checkoutBtn" class="btn btn-outline-black btn-sm btn-block">Mua hàng</button>
 								</form>

@@ -88,7 +88,9 @@
               </div>
               <% } %>
               <form action="CouponController" method="POST">
-                <input type="hidden" name="action" value="add">
+
+                <input type="hidden" name="csrfToken" value="${csrfToken}">
+ <input type="hidden" name="action" value="add">
                 <div class="form-group row">
                   <label class="col-form-label col-md-2">Tên Mã Khuyến Mãi</label>
                   <div class="col-md-10">
@@ -236,6 +238,9 @@
                       </a>
                       <c:if test="${coupon.currentUsage == 0}">
                         <form id="deleteForm" action="CouponController" method="POST" style="display:none;">
+
+                          <input type="hidden" name="csrfToken" value="${csrfToken}">
+
                           <input type="hidden" name="action" value="delete">
                           <input type="hidden" name="id" value="${coupon.couponID}">
                         </form>

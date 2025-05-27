@@ -91,9 +91,18 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quên mật khẩu</title>
 
+
     <link href="../css/bootstrap.minfg.css" rel="stylesheet">
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>--%>
     <script src="../js/jquery.min.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link href="../css/bootstrap.minfg.css" rel="stylesheet">
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>--%>
+    <script src="../js/jquery.min.js"></script>
+
     <style>
         body {
             background-color: #eee;
@@ -128,6 +137,9 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
 <div class="container padding-bottom-3x mb-2 mt-5">
     <div class="col-lg-8 col-md-10 mx-auto">
         <form class="card mt-4" action="../forgotPassword" method="POST">
+
+            <input type="hidden" name="csrfToken" value="${csrfToken}">
+
             <div class="card-body">
                 <input type="hidden" name="action" value="DoiMatKhau">
                 <label for="email-for-pass">Nhập địa chỉ email của bạn</label>
@@ -150,7 +162,12 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
     </div>
 </div>
 
+
 <%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>--%>
-<script src="../js/bootstrap.bundle.minfg.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
+<%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>--%>
+
 </body>
 </html>

@@ -7,21 +7,11 @@ import DTO.customerDTO.requestDTO.OrderRequestDTO;
 import ENumeration.EOrderStatus;
 import business.Order;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-<<<<<<< HEAD
-=======
+
 import jakarta.persistence.*;
 
->>>>>>> master
-=======
->>>>>>> master
+import jakarta.persistence.*;
+
 import java.util.List;
 
 public class OrderDAOImpl implements IOrderDAO {

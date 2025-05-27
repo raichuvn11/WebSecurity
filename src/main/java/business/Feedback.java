@@ -1,14 +1,5 @@
 package business;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-import javax.persistence.*;
-=======
 import jakarta.persistence.*;
->>>>>>> master
-=======
-import javax.persistence.*;
->>>>>>> master
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

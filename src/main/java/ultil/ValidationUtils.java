@@ -5,9 +5,7 @@ public class ValidationUtils {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@gmail\\.com$";
         return email.matches(emailRegex);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 
     public static String validatePassword(String password) {
         if (password == null) return "Mật khẩu không được để trống";
@@ -90,7 +88,5 @@ public class ValidationUtils {
         return false;
     }
 
->>>>>>> master
-=======
->>>>>>> master
+
 }

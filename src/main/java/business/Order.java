@@ -6,16 +6,8 @@ package business;
 
 import ENumeration.EOrderStatus;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import javax.persistence.*;
-=======
 import jakarta.persistence.*;
 
->>>>>>> master
-=======
-import javax.persistence.*;
->>>>>>> master
 import java.io.Serializable;
 import java.util.*;
 

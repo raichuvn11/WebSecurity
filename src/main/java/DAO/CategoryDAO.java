@@ -1,20 +1,7 @@
 package DAO;
 import data.DBUtil;
 import business.Category;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
-=======
 import jakarta.persistence.*;
-
->>>>>>> master
-=======
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
->>>>>>> master
 import java.util.ArrayList;
 import java.util.List;
 

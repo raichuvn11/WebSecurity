@@ -11,28 +11,20 @@ Author     : HUY
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <link rel="stylesheet" href="../css/all.minl.css">
-=======
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
->>>>>>> master
-=======
-    <link rel="stylesheet" href="../css/all.minl.css">
->>>>>>> master
+
     <link rel="stylesheet" href="../scss/login.css">
 </head>
 <body>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="../registerServlet" method="post">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
             <input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
             <h1>Tạo tài khoản</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-facebook"></i></a>
@@ -56,13 +48,9 @@ Author     : HUY
     </div>
     <div class="form-container sign-in-container">
         <form action="../login" method="post">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
             <input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
             <h1>Đăng nhập</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-facebook"></i></a>

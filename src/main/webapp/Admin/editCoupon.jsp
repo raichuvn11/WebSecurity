@@ -67,13 +67,9 @@
               </div>
               <% } %>
               <form action="CouponController" method="POST">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
                 <input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
                 <input type="hidden" name="action" value="edit">
                 <div class="form-group row">
                   <label class="col-form-label col-md-2">Tên Mã Khuyến Mãi</label>

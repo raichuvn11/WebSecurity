@@ -4,15 +4,8 @@ import business.Customer;
 import business.Message;
 import business.Staff;
 import data.DBUtil;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import javax.persistence.EntityManager;
-=======
-import jakarta.persistence.EntityManager;
->>>>>>> master
-=======
-import javax.persistence.EntityManager;
->>>>>>> master
+import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -15,15 +15,10 @@
     <link rel="stylesheet" href="<c:url value='/assets/css/style.css'/>">
 
     <!-- SweetAlert2 CSS -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
-=======
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
->>>>>>> master
-=======
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
->>>>>>> master
+
+
 
     <title>Save Profile</title>
 </head>
@@ -41,13 +36,9 @@
             <div class="card">
                 <div class="card-body">
                     <form method="POST" action="<c:url value='/saveProfile'/>" enctype="multipart/form-data">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
                         <input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
                         <div class="row">
                             <!-- Name -->
                             <div class="col-lg-6 col-sm-12">
@@ -133,15 +124,9 @@
 <script src="<c:url value='/assets/js/bootstrap.bundle.min.js'/>"></script>
 
 <!-- SweetAlert2 JS -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<script src="../js/sweetalert2.all.min.js"></script>
-=======
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
->>>>>>> master
-=======
-<script src="../js/sweetalert2.all.min.js"></script>
->>>>>>> master
+
 
 <!-- SweetAlert2 Success Notification -->
 <script>

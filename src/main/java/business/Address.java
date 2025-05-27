@@ -1,23 +1,11 @@
 package business;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-<<<<<<< HEAD
-=======
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
->>>>>>> master
-=======
->>>>>>> master
 import java.io.Serializable;
 
 @Entity

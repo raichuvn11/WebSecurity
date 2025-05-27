@@ -14,25 +14,19 @@
   <meta name="keywords" content="bootstrap, bootstrap4" />
 
   <!-- Bootstrap CSS -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
+
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/all.min.css" rel="stylesheet">
   <link href="../css/tiny-slider.css" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/all.minf.css" rel="stylesheet">
-<<<<<<< HEAD
-=======
+
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="css/tiny-slider.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
->>>>>>> master
-=======
->>>>>>> master
+
 
   <title>Trang FeedBack</title>
 </head>

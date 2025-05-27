@@ -7,21 +7,8 @@ import DTO.customerDTO.requestDTO.FurnitureRequestDTO;
 import ENumeration.EOrderStatus;
 import business.Furniture;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-<<<<<<< HEAD
-=======
 import jakarta.persistence.*;
 
->>>>>>> master
-=======
->>>>>>> master
 import java.util.ArrayList;
 import java.util.List;
 

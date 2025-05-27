@@ -11,6 +11,9 @@
 <div class="container">
     <h1>Xác Thực OTP</h1>
     <form action="../verifyServlet" method="post">
+
+        <input type="hidden" name="csrfToken" value="${csrfToken}">
+
         <input type="hidden" name="action" value="send">
         <input type="email" name="email" value="${customerInfor.email}" required />
         <button type="submit">Gửi OTP</button>
@@ -29,6 +32,8 @@
         }
     %>
 </div>
+
 <script src="../js/script.js"></script>
+
 </body>
 </html>

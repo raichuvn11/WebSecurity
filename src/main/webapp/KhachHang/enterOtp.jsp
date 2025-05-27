@@ -11,12 +11,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Enter OTP</title>
     <link
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
+
             href="../css/bootstrap.mine.css"
-            rel="stylesheet" id="bootstrap-css">
+            rel="stylesheet">
 
     <script
             src="../js/bootstrap.min.js"></script>
@@ -25,8 +22,7 @@
 
     <link rel="stylesheet"
           href="../css/font-awesome.min.css">
-<<<<<<< HEAD
-=======
+    <link
             href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
             rel="stylesheet" id="bootstrap-css">
 
@@ -37,9 +33,7 @@
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
->>>>>>> master
-=======
->>>>>>> master
+
 
     <style type="text/css">
         .form-gap {
@@ -69,13 +63,9 @@
                         <div class="panel-body">
                             <form id="register-form" action="../ValidateOtp" role="form" autocomplete="off" class="form" method="post">
                                 <input type="hidden" name="action" value="XacThucOTP">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
                                 <input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>

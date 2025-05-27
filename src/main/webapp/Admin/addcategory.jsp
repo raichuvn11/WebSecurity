@@ -21,13 +21,9 @@
                 </div>
             </div>
             <form id="categoryForm" action="category-controller" method="post">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
                 <input type="hidden" name="csrfToken" value="${csrfToken}">
->>>>>>> master
-=======
->>>>>>> master
+
                 <div class="card">
                     <div class="card-body">
                         <div class="row">

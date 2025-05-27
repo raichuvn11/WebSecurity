@@ -10,16 +10,16 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-<<<<<<< HEAD
+
 import java.io.IOException;
-=======
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
->>>>>>> master
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -27,10 +27,9 @@ import java.util.Objects;
 @WebServlet("/editStaff")
 @MultipartConfig
 public class EditStaffServlet extends HttpServlet {
-<<<<<<< HEAD
-=======
+
     private static final String UPLOAD_DIR = "E:/HK2_24-25/Bao_mat_web/DACuoiKy/Project/WebSecurity/src/main/webapp/upload/";
->>>>>>> master
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,8 +63,6 @@ public class EditStaffServlet extends HttpServlet {
             address.setStreet(addressStreet);
             address.setProvince(addressProvince);
             staff.setAddress(address);
-<<<<<<< HEAD
-=======
 
             Part filePart = request.getPart("avatar");
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
@@ -74,7 +71,7 @@ public class EditStaffServlet extends HttpServlet {
             try (InputStream input = filePart.getInputStream()) {
                 Files.copy(input, uploadFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
->>>>>>> master
+
             byte[] avatarBytes = ImageUtil.renderImage(request.getPart("avatar"));
             if(avatarBytes != null){
                 staff.setAvatar(avatarBytes);

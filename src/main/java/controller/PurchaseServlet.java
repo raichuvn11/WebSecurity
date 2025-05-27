@@ -8,8 +8,12 @@ import business.*;
 import config.UtilsEmail;
 import data.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import ultil.LoggerUtil;
 =======
+>>>>>>> master
+=======
+import ultil.LoggerUtil;
 >>>>>>> master
 
 import javax.servlet.*;
@@ -24,6 +28,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 import java.util.logging.Logger;
 
 @WebServlet(name = "PurchaseServlet", value = "/PurchaseServlet")
@@ -33,12 +40,15 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("doGet called - redirecting to doPost");
+<<<<<<< HEAD
 =======
 
 @WebServlet(name = "PurchaseServlet", value = "/PurchaseServlet")
 public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+>>>>>>> master
+=======
 >>>>>>> master
         doPost(request, response);
     }
@@ -49,6 +59,9 @@ public class PurchaseServlet extends HttpServlet {
         ServletContext sc = getServletContext();
         String action = request.getParameter("action");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
         // Lấy IP của client
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -65,6 +78,7 @@ public class PurchaseServlet extends HttpServlet {
 
         if(customer == null) {
             logger.warning("Thiếu thông tin đăng nhập từ người dùng. IP: " + ipAddress);
+<<<<<<< HEAD
 =======
         if(action == null) {
             action = "viewcart";
@@ -72,6 +86,8 @@ public class PurchaseServlet extends HttpServlet {
         HttpSession session = request.getSession(); // không tạo sesion mới nếu có
         Customer customer = (Customer) session.getAttribute("customer");
         if(customer == null) {
+>>>>>>> master
+=======
 >>>>>>> master
             url = "/KhachHang/login.jsp";
             sc.getRequestDispatcher(url).forward(request, response);
@@ -86,13 +102,19 @@ public class PurchaseServlet extends HttpServlet {
             if (check) {
                 request.setAttribute("message", "Thêm thành công!");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
                 logger.info("Thêm vào giỏ hàng thành công. KH: " + customer.getPersonID() + "IP: " + ipAddress);
             } else {
                 request.setAttribute("message", "Sản phẩm đã có trong giỏ hàng!");
                 logger.info("Thêm vào giỏ hàng thành công. KH: " + customer.getPersonID() + "IP: " + ipAddress);
+<<<<<<< HEAD
 =======
             } else {
                 request.setAttribute("message", "Sản phẩm đã có trong giỏ hàng!");
+>>>>>>> master
+=======
 >>>>>>> master
             }
             sc.getRequestDispatcher(url).forward(request, response);
@@ -115,8 +137,12 @@ public class PurchaseServlet extends HttpServlet {
             sc.getRequestDispatcher(url).forward(request, response);
         } else if (action.equals("purchase")) { // thiếu coupon !! sửa ở đây
 <<<<<<< HEAD
+<<<<<<< HEAD
             logger.info("Khách hàng mua hàng: KH: " + customer.getPersonID() + "IP: " + ipAddress);
 =======
+>>>>>>> master
+=======
+            logger.info("Khách hàng mua hàng: KH: " + customer.getPersonID() + "IP: " + ipAddress);
 >>>>>>> master
             url = "/KhachHang/checkout.jsp";
             String listID = request.getParameter("listFurnitureID"); //Toàn bộ tên được chọn

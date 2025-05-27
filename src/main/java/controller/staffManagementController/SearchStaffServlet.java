@@ -129,10 +129,13 @@ public class SearchStaffServlet extends HttpServlet {
         return searchStaff;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
+>>>>>>> master
+=======
 >>>>>>> master
 }

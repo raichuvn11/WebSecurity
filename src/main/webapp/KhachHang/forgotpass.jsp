@@ -92,6 +92,7 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
     <title>Quên mật khẩu</title>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <link href="../css/bootstrap.minfg.css" rel="stylesheet">
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>--%>
     <script src="../js/jquery.min.js"></script>
@@ -99,6 +100,11 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+>>>>>>> master
+=======
+    <link href="../css/bootstrap.minfg.css" rel="stylesheet">
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>--%>
+    <script src="../js/jquery.min.js"></script>
 >>>>>>> master
     <style>
         body {
@@ -135,8 +141,11 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
     <div class="col-lg-8 col-md-10 mx-auto">
         <form class="card mt-4" action="../forgotPassword" method="POST">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
+=======
 >>>>>>> master
             <div class="card-body">
                 <input type="hidden" name="action" value="DoiMatKhau">
@@ -161,10 +170,15 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
 </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>--%>
 <script src="../js/bootstrap.bundle.minfg.js"></script>
 =======
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+>>>>>>> master
+=======
+<%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>--%>
+<script src="../js/bootstrap.bundle.minfg.js"></script>
 >>>>>>> master
 </body>
 </html>

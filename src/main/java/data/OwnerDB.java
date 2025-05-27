@@ -4,12 +4,18 @@ import business.Customer;
 import business.Owner;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 >>>>>>> master
 
 public class OwnerDB {

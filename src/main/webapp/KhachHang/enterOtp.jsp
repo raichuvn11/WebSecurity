@@ -12,6 +12,9 @@
     <title>Enter OTP</title>
     <link
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
             href="../css/bootstrap.mine.css"
             rel="stylesheet" id="bootstrap-css">
 
@@ -22,6 +25,7 @@
 
     <link rel="stylesheet"
           href="../css/font-awesome.min.css">
+<<<<<<< HEAD
 =======
             href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
             rel="stylesheet" id="bootstrap-css">
@@ -33,6 +37,8 @@
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+>>>>>>> master
+=======
 >>>>>>> master
 
     <style type="text/css">
@@ -64,8 +70,11 @@
                             <form id="register-form" action="../ValidateOtp" role="form" autocomplete="off" class="form" method="post">
                                 <input type="hidden" name="action" value="XacThucOTP">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                                 <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
+=======
 >>>>>>> master
                                 <div class="form-group">
                                     <div class="input-group">

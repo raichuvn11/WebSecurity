@@ -3,10 +3,14 @@ package data;
 import business.Customer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.persistence.*;
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
+import javax.persistence.*;
 >>>>>>> master
 
 public class CustomerDB {

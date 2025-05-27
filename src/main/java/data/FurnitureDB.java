@@ -6,13 +6,19 @@ import business.Feedback;
 import business.Furniture;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+<<<<<<< HEAD
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
 >>>>>>> master
 import java.util.Arrays;
 import java.util.List;

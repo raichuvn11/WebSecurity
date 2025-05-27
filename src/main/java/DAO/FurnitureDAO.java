@@ -4,13 +4,19 @@ import data.DBUtil;
 import business.Furniture;
 import business.Image;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+<<<<<<< HEAD
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
 >>>>>>> master
 
 import java.util.*;

@@ -5,11 +5,16 @@ import business.Shift;
 import business.Staff;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 >>>>>>> master
 import java.time.LocalDate;
 import java.time.YearMonth;

@@ -5,15 +5,21 @@
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql-b86aa12-student-189d.e.aivencloud.com:18941/Furniture?ssl-mode=REQUIRED"/>
 			<property name="javax.persistence.jdbc.user" value="avnadmin"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.password" value="AVNS_HaRzMLhIdgMhg30-SDc"/>
+<<<<<<< HEAD
 =======
 			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://mysql-b86aa12-student-189d.e.aivencloud.com:18941/Furniture?ssl-mode=REQUIRED"/>
 			<property name="jakarta.persistence.jdbc.user" value="avnadmin"/>
 			<property name="jakarta.persistence.jdbc.password" value="AVNS_HaRzMLhIdgMhg30-SDc"/>
 			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+>>>>>>> master
+=======
 >>>>>>> master
 			<property name="javax.persistence.schema-generation.database.action" value="create"/>
 			<property name="eclipselink.connection-pool.default.initial" value="5"/>

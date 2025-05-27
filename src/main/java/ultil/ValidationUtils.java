@@ -6,6 +6,7 @@ public class ValidationUtils {
         return email.matches(emailRegex);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
     public static String validatePassword(String password) {
@@ -89,5 +90,7 @@ public class ValidationUtils {
         return false;
     }
 
+>>>>>>> master
+=======
 >>>>>>> master
 }

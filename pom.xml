@@ -7,9 +7,13 @@
     <packaging>war</packaging>
     <name>FurnitureShop_11_11_14h</name>
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 
+>>>>>>> master
+=======
+    
 >>>>>>> master
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -18,16 +22,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
         <jakartaee>8.0.0</jakartaee>
     </properties>
     
     <dependencies>
+<<<<<<< HEAD
 =======
         <jakartaee>9.1.0</jakartaee>
     </properties>
 
     <dependencies>
         <!-- Jakarta EE API - Updated to fix vulnerabilities -->
+>>>>>>> master
+=======
 >>>>>>> master
         <dependency>
             <groupId>jakarta.platform</groupId>
@@ -36,6 +46,7 @@
             <scope>provided</scope>
         </dependency>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         <!-- HttpClient -->
 =======
@@ -59,12 +70,18 @@
 
         <!-- Gson - Updated to latest version -->
 >>>>>>> master
+=======
+        <!-- Gson -->
+>>>>>>> master
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
         
         <dependency>
 	      <groupId>junit</groupId>
@@ -84,6 +101,7 @@
 		    <version>4.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
+<<<<<<< HEAD
         <dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
@@ -115,14 +133,19 @@
             <scope>provided</scope>
         </dependency>
 
+=======
+>>>>>>> master
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.3.0</version>
         </dependency>
+<<<<<<< HEAD
 
         <!-- JavaMail - Updated versions -->
+>>>>>>> master
+=======
 >>>>>>> master
         <dependency>
             <groupId>javax.mail</groupId>
@@ -135,10 +158,17 @@
             <version>1.6.2</version>
         </dependency>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5-fluent</artifactId>
             <version>5.2</version>
+=======
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5-fluent</artifactId>
+            <version>5.4.3</version>
+>>>>>>> master
         </dependency>
 		<dependency>
 		    <groupId>javax.servlet.jsp.jstl</groupId>
@@ -147,6 +177,7 @@
 		    <scope>provided</scope>
 		</dependency>
 
+<<<<<<< HEAD
 =======
 
         <!-- HttpClient5 - Updated to latest -->
@@ -176,12 +207,17 @@
             <version>2.7.3</version>
         </dependency>
 >>>>>>> master
+=======
+>>>>>>> master
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.servlet.jsp.jstl</artifactId>
             <version>1.2.5</version>
         </dependency>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 		
 		<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.jpa -->
 		<dependency>
@@ -197,6 +233,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+<<<<<<< HEAD
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
@@ -206,11 +243,43 @@
             <artifactId>json</artifactId>
             <version>20210307</version> <!-- Hoặc phiên bản mới nhất -->
         </dependency>
+=======
+            <version>7.5.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20250517</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-api</artifactId>
+            <version>11.0.7</version> <!-- hoặc mới hơn -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>11.0.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/xalan/xalan -->
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.webjars.bower/moment -->
+>>>>>>> master
     </dependencies>
     
      <build>
         <plugins>
             <plugin>
+<<<<<<< HEAD
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -250,6 +319,11 @@
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>8.4.0</version> <!-- Phiên bản mới nhất bạn có thể kiểm tra trên https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
+=======
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>8.4.2</version>
+>>>>>>> master
                 <executions>
                     <execution>
                         <goals>
@@ -258,11 +332,18 @@
                     </execution>
                 </executions>
             </plugin>
+<<<<<<< HEAD
             <!-- Maven Compiler Plugin - Updated -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
+>>>>>>> master
+=======
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
 >>>>>>> master
                 <configuration>
                     <source>14</source>
@@ -273,6 +354,9 @@
                 </configuration>
             </plugin>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
             <plugin>
 		            <groupId>org.apache.maven.plugins</groupId>
 		            <artifactId>maven-war-plugin</artifactId>
@@ -286,6 +370,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+<<<<<<< HEAD
                 <version>2.6</version>
 =======
 
@@ -301,6 +386,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.6.1</version>
+>>>>>>> master
+=======
+                <version>3.5.0</version>
 >>>>>>> master
                 <executions>
                     <execution>

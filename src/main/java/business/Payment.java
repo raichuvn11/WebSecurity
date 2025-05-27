@@ -5,6 +5,9 @@
 package business;
 import java.io.Serializable;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
@@ -14,10 +17,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+<<<<<<< HEAD
 =======
 import jakarta.persistence.*;
 import java.util.Date;
 
+>>>>>>> master
+=======
 >>>>>>> master
 
 /**

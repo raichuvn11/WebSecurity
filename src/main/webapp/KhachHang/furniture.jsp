@@ -20,17 +20,23 @@
 
     <!-- Bootstrap CSS -->
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/all.min.css" rel="stylesheet">
     <link href="../css/tiny-slider.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+<<<<<<< HEAD
 =======
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="css/tiny-slider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+>>>>>>> master
+=======
 >>>>>>> master
 
     <title>Trang chi tiết sản phẩm </title>
@@ -71,8 +77,11 @@
                         </ul>
                         <form action="../PurchaseServlet" method="POST" class="btn-form" style="display:inline;">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                             <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
+=======
 >>>>>>> master
                             <input type="hidden" name="furnitureID" value="${furniture.id}">
                             <input type="hidden" name="action" value="addtocart">
@@ -117,8 +126,11 @@
                                 <div class="swiper-slide">
                                     <form action="../furnitureServlet" method="POST" style="display:inline;">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                                         <input type="hidden" name="csrfToken" value="${csrfToken}">
+>>>>>>> master
+=======
 >>>>>>> master
                                         <input type="hidden" name="furnitureId" value="${Furniture.id}">
                                         <input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
@@ -166,17 +178,23 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/tiny-slider.js"></script>
 <script src="../js/custom.js"></script>
 <script src="../js/swiper-bundle.min.js"></script>
 <script src="../js/furniture.js"></script>
+<<<<<<< HEAD
 =======
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/tiny-slider.js"></script>
 <script src="js/custom.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="js/furniture.js"></script>
+>>>>>>> master
+=======
 >>>>>>> master
 </body>
 </html>

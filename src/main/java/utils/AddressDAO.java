@@ -2,13 +2,19 @@ package utils;
 
 import business.Address;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+<<<<<<< HEAD
 =======
 import jakarta.persistence.*;
 
+>>>>>>> master
+=======
 >>>>>>> master
 
 public class AddressDAO {

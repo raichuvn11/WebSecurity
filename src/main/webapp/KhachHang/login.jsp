@@ -45,6 +45,7 @@ Author     : HUY
     <div class="form-container sign-in-container">
         <form action="../login" method="post">
             <h1>Đăng nhập</h1>
+            <input type="hidden" name="csrfToken" value="${csrfToken}">
             <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-facebook"></i></a>
                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=${constant.GOOGLE_REDIRECT_URI}&response_type=code&client_id=121656116147-na8us5c1uluts0pmsm70bg99ggjgj3dc.apps.googleusercontent.com&approval_prompt=force" class="social"><i class="fab fa-google-plus-g"></i></a>

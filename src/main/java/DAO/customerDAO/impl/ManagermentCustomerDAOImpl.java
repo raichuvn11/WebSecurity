@@ -6,7 +6,8 @@ import DAO.customerDAO.IManagermentCustomerDAO;
 import DTO.customerDTO.requestDTO.CustomerRequestDTO;
 import business.Customer;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.lang.reflect.Type;
 import java.util.List;
 

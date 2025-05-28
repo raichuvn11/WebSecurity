@@ -1,8 +1,9 @@
 package business;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "messages")

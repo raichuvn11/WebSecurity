@@ -6,10 +6,9 @@ import business.Feedback;
 import business.Furniture;
 import business.Order;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
+
+
 import java.util.ArrayList;
 
 public class OrderDB {

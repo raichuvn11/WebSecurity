@@ -1,6 +1,6 @@
 package business;
 
-import javax.persistence.Entity;
+import jakarta.persistence.*;
 
 
 @Entity

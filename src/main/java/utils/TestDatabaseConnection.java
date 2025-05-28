@@ -1,8 +1,9 @@
 package utils;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
+import jakarta.persistence.*;
+
+
 import java.util.List;
 
 public class TestDatabaseConnection {

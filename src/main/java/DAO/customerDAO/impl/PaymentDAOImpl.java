@@ -7,10 +7,8 @@ import services.customerService.IFurnitureOfOrderService;
 import services.customerService.Impl.FurnitureOfOrderServiceImpl;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
+
 
 public class PaymentDAOImpl implements IPaymentDAO {
     private IFurnitureOfOrderService furnitureOfOrderService =new FurnitureOfOrderServiceImpl();

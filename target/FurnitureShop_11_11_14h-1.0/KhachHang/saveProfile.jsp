@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<c:url value='/assets/css/style.css'/>">
 
     <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 
     <title>Save Profile</title>
 
@@ -131,7 +131,7 @@
     })();
 </script>
 <!-- SweetAlert2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script src="../js/sweetalert2.all.min.js"></script>
 
 <!-- SweetAlert2 Success Notification -->
 <script nonce="<%= cspNonce %>" >

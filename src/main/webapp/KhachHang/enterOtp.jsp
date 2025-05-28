@@ -18,7 +18,7 @@
 
     <script
             src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
 
     <link rel="stylesheet"
@@ -51,6 +51,7 @@
 
                         <div class="panel-body">
                             <form id="register-form" action="../ValidateOtp" role="form" autocomplete="off" class="form" method="post">
+                                <input type="hidden" name="csrfToken" value="${csrfToken}">
                                 <input type="hidden" name="action" value="XacThucOTP">
                                 <div class="form-group">
                                     <div class="input-group">

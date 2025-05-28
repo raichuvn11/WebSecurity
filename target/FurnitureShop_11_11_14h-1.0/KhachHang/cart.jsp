@@ -50,6 +50,7 @@
 	<div class="container">
 		<div class="row mb-5">
 			<form class="col-md-12" method="post" action="../PurchaseServlet">
+				<input type="hidden" name="csrfToken" value="${csrfToken}">
 				<div class="site-blocks-table">
 					<table class="table">
 						<thead>
@@ -110,7 +111,7 @@
 			<div class="col-md-6">
 				<div class="row mb-5">
 					<div class="col-md-6">
-						<form action="../shopServlet" method="POST" class="inline-display">
+						<form action="../shopServlet" method="GET" class="inline-display">
 							<button class="btn btn-outline-black btn-sm btn-block">Tiếp tục mua sắm</button>
 						</form>
 					</div>
@@ -122,6 +123,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<form action="../PurchaseServlet" method="POST" class="inline-display" id="purchaseForm">
+									<input type="hidden" name="csrfToken" value="${csrfToken}">
 									<input type="hidden" name="action" value="purchase">
 									<button id="checkoutBtn" class="btn btn-outline-black btn-sm btn-block">Mua hàng</button>
 								</form>

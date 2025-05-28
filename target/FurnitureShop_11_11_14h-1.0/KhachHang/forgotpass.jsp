@@ -131,6 +131,7 @@ Nhập địa chỉ email đã đăng ký. Sau đó chúng tôi sẽ gửi email
 <div class="container padding-bottom-3x mb-2 mt-5">
     <div class="col-lg-8 col-md-10 mx-auto">
         <form class="card mt-4" action="../forgotPassword" method="POST">
+            <input type="hidden" name="csrfToken" value="${csrfToken}">
             <div class="card-body">
                 <input type="hidden" name="action" value="DoiMatKhau">
                 <label for="email-for-pass">Nhập địa chỉ email của bạn</label>

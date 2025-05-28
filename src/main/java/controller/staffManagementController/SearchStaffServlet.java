@@ -40,6 +40,10 @@ public class SearchStaffServlet extends HttpServlet {
 
         request.getRequestDispatcher("/Admin/listStaff.jsp").forward(request, response);
     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
 
     private List<Staff> getStaffByName(List<Staff> listStaff, String searchName){
         List<Staff> searchStaff = new ArrayList<>();

@@ -49,6 +49,7 @@
 
                 <div class="pt-3 pb-3">
                     <form class="form-horizontal" action="newPassword" method="POST">
+                        <input type="hidden" name="csrfToken" value="${csrfToken}">
                         <input type="hidden" name="action" value="LuuMatKhau">
 
                         <!-- New Password Input -->

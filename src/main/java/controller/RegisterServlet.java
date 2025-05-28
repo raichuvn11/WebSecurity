@@ -37,6 +37,10 @@ public class RegisterServlet extends HttpServlet {
             url = "/KhachHang/login.jsp";
             messageDK = "Vui lòng nhập đúng định dạng email";
         }
+        else if(ValidationUtils.validatePassword(password) != null){
+            url = "/KhachHang/login.jsp";
+            messageDK = ValidationUtils.validatePassword(password);
+        }
         else if (CustomerDB.emailExists(email)){
             url = "/KhachHang/login.jsp";
             messageDK = "Email này đã được đăng kí trong hệ thống";

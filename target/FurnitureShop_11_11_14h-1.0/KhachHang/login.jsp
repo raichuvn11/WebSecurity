@@ -20,6 +20,7 @@ Author     : HUY
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="../registerServlet" method="post">
+            <input type="hidden" name="csrfToken" value="${csrfToken}">
             <h1>Tạo tài khoản</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-facebook"></i></a>

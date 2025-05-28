@@ -80,6 +80,7 @@
 <div class="update-password-container">
   <h2>Update Password</h2>
   <form action="updatePassword.jsp" method="post">
+    <input type="hidden" name="csrfToken" value="${csrfToken}">
     <div class="form-group">
       <label for="current-password">Current Password</label>
       <input type="password" id="current-password" name="current-password" placeholder="Enter current password" />

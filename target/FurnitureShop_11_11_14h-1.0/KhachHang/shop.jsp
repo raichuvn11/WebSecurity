@@ -52,7 +52,7 @@
 
 <div class="untree_co-section product-section before-footer-section">
 	<div class="container">
-		<form id="formSearch" action="../shopServlet" method="POST" class="d-flex mb-3">
+		<form id="formSearch" action="../shopServlet" method="GET" class="d-flex mb-3">
 			<style nonce="<%= cspNonce %>">
 				.custom-width-85 {
 					width: 85%;
@@ -173,6 +173,7 @@
 							</form>
 							<!-- Form chứa nút submit -->
 							<form action="../PurchaseServlet" method="POST" class="btn-form inline-display" >
+								<input type="hidden" name="csrfToken" value="${csrfToken}">
 								<input type="hidden" name="furnitureID" value="${furniture.id}">
 								<input type="hidden" name="action" value="addtocart">
 								<button type="submit" class="btn-submit">

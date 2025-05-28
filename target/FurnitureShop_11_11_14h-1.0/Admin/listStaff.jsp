@@ -57,7 +57,7 @@
                                 <span><img src="assets/img/icons/closes.svg" alt="img"></span>
                             </a>
                         </div>
-                        <form action="${pageContext.request.contextPath}/searchStaff" method="post" class="d-flex justify-content-center">
+                        <form action="${pageContext.request.contextPath}/searchStaff" method="GET" class="d-flex justify-content-center">
                             <input type="text" class="form-control margin-right5" name="search-name" value="${searchName}" placeholder="Nhập tên tìm kiếm...">
                             <button type="submit" name="search-action" value="search-name" class="btn btn-filters ms-auto">
                                 <img src="assets/img/icons/search-whites.svg" alt="img">
@@ -68,7 +68,7 @@
 
                 <div class="card" id="filter_inputs">
                     <div class="card-body pb-0">
-                        <form action="${pageContext.request.contextPath}/searchStaff" method="post">
+                        <form action="${pageContext.request.contextPath}/searchStaff" method="GET">
                             <div class="row">
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <select name="search-status" id="search-status" class="form-control select mb-3">
@@ -156,12 +156,14 @@
                                 </td>
                                 <td>
                                     <form action="${pageContext.request.contextPath}/editStaff" method="post" class="d-inline me-3" title="Chi tiết">
+                                        <input type="hidden" name="csrfToken" value="${csrfToken}">
                                         <input type="hidden" name="emp-id" value="${staff.personID}"/>
                                         <button type="submit" class="btn p-0 border-0 bg-transparent">
                                             <img src="assets/img/icons/edit.svg" alt="Edit" class="wh24">
                                         </button>
                                     </form>
                                     <form action="${pageContext.request.contextPath}/deleteStaff" method="post" id="delete-form" class="d-inline me-3" title="Xóa">
+                                        <input type="hidden" name="csrfToken" value="${csrfToken}">
                                         <input type="hidden" name="emp-id" value="${staff.personID}"/>
                                         <c:if test="${staff.status == 'Active'}">
                                             <button type="submit" name="action" value="delete" class="btn p-0 border-0 bg-transparent" id="delete-button">

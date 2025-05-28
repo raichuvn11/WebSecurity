@@ -23,6 +23,7 @@
                 </div>
             </div>
             <form id="categoryForm" action="category-controller" method="post">
+                <input type="hidden" name="csrfToken" value="${csrfToken}">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">

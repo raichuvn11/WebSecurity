@@ -69,7 +69,7 @@
 											display: inline;
 										}
 									</style>
-									<form action="../furnitureServlet" method="POST" class="inline-display">
+									<form action="../furnitureServlet" method="GET" class="inline-display">
 										<input type="hidden" name="furnitureId" value="${Furniture.id}">
 										<input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
 										<a href="javascript:void(0);" class="product-item" role="button" tabindex="0">
@@ -111,7 +111,7 @@
 						<div class="swiper-wrapper">
 							<c:forEach var="Furniture" items="${listFurnitureNew}">
 								<div class="swiper-slide">
-									<form action="../furnitureServlet" method="POST" class="inline-display">
+									<form action="../furnitureServlet" method="GET" class="inline-display">
 										<input type="hidden" name="furnitureId" value="${Furniture.id}">
 										<input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
 										<a href="javascript:void(0);" class="product-item" role="button" tabindex="0">

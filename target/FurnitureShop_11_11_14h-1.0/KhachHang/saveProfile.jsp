@@ -35,6 +35,7 @@
             <div class="card">
                 <div class="card-body">
                     <form method="POST" action="<c:url value='/saveProfile'/>" enctype="multipart/form-data">
+                        <input type="hidden" name="csrfToken" value="${csrfToken}">
                         <div class="row">
                             <!-- Name -->
                             <div class="col-lg-6 col-sm-12">

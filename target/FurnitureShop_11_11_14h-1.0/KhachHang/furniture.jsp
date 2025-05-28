@@ -68,6 +68,7 @@
                             }
                         </style>
                         <form action="../PurchaseServlet" method="POST" class="btn-form inline-display" >
+                            <input type="hidden" name="csrfToken" value="${csrfToken}">
                             <input type="hidden" name="furnitureID" value="${furniture.id}">
                             <input type="hidden" name="action" value="addtocart">
                             <button type="submit" class="btn-submit">
@@ -109,7 +110,7 @@
                         <div class="swiper-wrapper">
                             <c:forEach var="Furniture" items="${listFurniture}">
                                 <div class="swiper-slide">
-                                    <form action="../furnitureServlet" method="POST" class="inline-display">
+                                    <form action="../furnitureServlet" method="GET" class="inline-display">
                                         <input type="hidden" name="furnitureId" value="${Furniture.id}">
                                         <input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
                                         <a href="javascript:void(0);" class="product-item" role="button" tabindex="0">

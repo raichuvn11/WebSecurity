@@ -1,10 +1,8 @@
 package utils;
 
 import business.Address;
+import jakarta.persistence.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class AddressDAO {
 

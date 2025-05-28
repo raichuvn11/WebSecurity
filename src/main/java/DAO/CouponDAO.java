@@ -3,12 +3,11 @@ package DAO;
 import business.Coupon;
 import data.DBUtil;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import java.util.List;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import business.Category;
+
+import java.util.List;
 
 public class CouponDAO {
 

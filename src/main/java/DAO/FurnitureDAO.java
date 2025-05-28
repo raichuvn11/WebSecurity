@@ -3,10 +3,8 @@ package DAO;
 import data.DBUtil;
 import business.Furniture;
 import business.Image;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
+
 
 import java.util.*;
 

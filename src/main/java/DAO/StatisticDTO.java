@@ -2,8 +2,8 @@ package DAO;
 import ENumeration.EOrderStatus;
 import business.*;
 import data.DBUtil;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;

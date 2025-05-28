@@ -2,7 +2,11 @@ package data;
 
 import business.Customer;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
+
+
+
 
 public class CustomerDB {
     public static Customer accountExists(String email, String pass){

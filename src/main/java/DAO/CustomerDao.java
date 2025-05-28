@@ -3,10 +3,8 @@ package DAO;
 import data.DBUtil;
 
 import business.Customer;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import javax.persistence.EntityTransaction;
+import jakarta.persistence.*;
+
 
 public class CustomerDao {
     public Customer getCustomerById(Long id) { // Chuyển đổi tham số thành Long

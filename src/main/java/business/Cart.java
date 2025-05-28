@@ -4,7 +4,9 @@
  */
 package business;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+
 import java.io.Serializable;
 import java.util.List;
 

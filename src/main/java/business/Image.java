@@ -1,16 +1,9 @@
 package business;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.servlet.http.Part;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-import javax.servlet.http.Part;
 import java.util.Base64;
-
-import java.io.Serializable;
 
 @Entity
 public class Image implements Serializable {

@@ -2,10 +2,7 @@ package DAO;
 
 import business.*;
 import business.Person;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -3,8 +3,10 @@ package data;
 import business.Coupon;
 import business.Furniture;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+
+import jakarta.persistence.*;
+
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

@@ -2,9 +2,9 @@ package data;
 
 import business.Staff;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
+
+import jakarta.persistence.*;
+
 
 public class StaffDB {
     public static Staff getStaffByEmailPass(String email, String password) {

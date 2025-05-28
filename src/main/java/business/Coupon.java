@@ -1,6 +1,8 @@
 package business;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Collections;

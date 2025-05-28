@@ -5,10 +5,9 @@ import ENumeration.EOrderStatus;
 import business.Feedback;
 import business.Furniture;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+
+import jakarta.persistence.*;
+
 import java.util.Arrays;
 import java.util.List;
 

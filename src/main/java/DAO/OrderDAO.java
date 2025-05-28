@@ -4,8 +4,8 @@ import ENumeration.EOrderStatus;
 import business.Order;
 import data.DBUtil;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.*;
+
 import java.util.List;
 
 public class OrderDAO {

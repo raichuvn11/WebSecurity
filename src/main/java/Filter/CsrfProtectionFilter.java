@@ -7,10 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(
-    urlPatterns = "/*", // Áp dụng cho tất cả các URL
-    servletNames = {"IndexServlet", "LoginServlet", "RegisterServlet"} // Chỉ áp dụng cho các servlet cụ thể
-)
 public class CsrfProtectionFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

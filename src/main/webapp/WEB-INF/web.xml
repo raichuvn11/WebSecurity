@@ -95,5 +95,13 @@
         <filter-name>CsrfProtectionFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>LoginRateLimitFilter</filter-name>
+        <filter-class>Filter.LoginRateLimitFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginRateLimitFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
 
 </web-app>

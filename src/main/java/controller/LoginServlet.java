@@ -20,13 +20,15 @@ import data.CustomerDB;
 import data.StaffDB;
 import data.OwnerDB;
 import ultil.LoggerUtil;
+import ultil.LoginAttempt;
 import utils.MaHoa;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
     private  static final Logger logger = LoggerUtil.getLogger();
-    private static final Map<String, Integer> loginAttempts = new HashMap<>();
+    private static final Map<String, LoginAttempt> loginAttempts = new HashMap<>();
     private static final int MAX_ATTEMPTS = 5;
+    private static final long LOCK_TIME = 15 * 60 * 1000; // 15 phút (milliseconds)
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,13 +44,19 @@ public class LoginServlet extends HttpServlet {
         String message = "";
         HttpSession session = request.getSession();
         // Kiểm tra nếu bị quá số lần sai
-        if (loginAttempts.containsKey(email) && loginAttempts.get(email) >= MAX_ATTEMPTS) {
-            message = "Bạn đã đăng nhập sai quá nhiều lần. Vui lòng thử lại sau.";
-            session.setAttribute("message", message);
-            response.sendRedirect(request.getContextPath() + url);
-            return;
-        }
+        LoginAttempt attempt = loginAttempts.getOrDefault(email, new LoginAttempt());
+        long currentTime = System.currentTimeMillis();
 
+        if (attempt.getAttempts() >= MAX_ATTEMPTS) {
+            if (currentTime - attempt.getLastAttemptTime() < LOCK_TIME) {
+                message = "Bạn đã đăng nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút.";
+                session.setAttribute("message", message);
+                response.sendRedirect(request.getContextPath() + url);
+                return;
+            } else {
+                attempt.reset(); // reset sau 15 phút
+            }
+        }
 
         // Lấy IP của client
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -65,7 +73,8 @@ public class LoginServlet extends HttpServlet {
                 Customer customer = CustomerDB.getCustomerByEmailPass(email, passW);
                 if (customer == null || customer.getStatus().equals("InActive")) {
                     message = "Sai tài khoản hoặc mật khẩu";
-                    loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
+                    attempt.incrementAttempts();
+                    loginAttempts.put(email, attempt);
                     logger.warning("Đăng nhập KH thất bại: " + email + ", IP: " + ipAddress);
                 } else {
                     session.setAttribute("customer", customer);
@@ -87,7 +96,8 @@ public class LoginServlet extends HttpServlet {
                 Staff staff = StaffDB.getStaffByEmailPass(email, pass);
                 if (staff == null || staff.getStatus().equals("InActive")) {
                     message = "Sai tài khoản hoặc mật khẩu";
-                    loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
+                    attempt.incrementAttempts();
+                    loginAttempts.put(email, attempt);
                     logger.warning("Đăng nhập Nhân viên thất bại: " + email + ", IP: " + ipAddress);
                 } else {
                     session.setAttribute("staff", staff);
@@ -108,7 +118,8 @@ public class LoginServlet extends HttpServlet {
             } else if (role.equals("owner")) {
                 Owner owner = OwnerDB.getOwnerByEmailPass(email, pass);
                 if (owner == null) {
-                    loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
+                    attempt.incrementAttempts();
+                    loginAttempts.put(email, attempt);
                     message = "Sai tài khoản hoặc mật khẩu";
                     logger.warning("Đăng nhập Chủ sở hữu thất bại: " + email + ", IP: " + ipAddress);
                 } else {

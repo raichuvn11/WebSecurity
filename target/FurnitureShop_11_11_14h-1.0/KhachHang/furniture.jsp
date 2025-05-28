@@ -176,11 +176,12 @@
         });
     });
 </script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/tiny-slider.js"></script>
+<script src="js/custom.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="js/furniture.js"></script>
 
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/tiny-slider.js"></script>
-<script src="../js/custom.js"></script>
-<script src="../js/swiper-bundle.min.js"></script>
-<script src="../js/furniture.js"></script>
+
 </body>
 </html>

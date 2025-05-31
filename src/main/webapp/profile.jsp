@@ -56,7 +56,7 @@
                     </div>
 
                     <form method="POST" action="/updateProfile" enctype="multipart/form-data">
-
+                        <input type="hidden" name="csrfToken" value="${csrfToken}">
                         <div class="profileupload">
                             <input type="file" id="imgInp" name="profileImage" accept="image/*">
                             <a href="javascript:void(0);"><img src="<c:url value='/assets/img/icons/edit-set.svg'/>" alt="edit"></a>

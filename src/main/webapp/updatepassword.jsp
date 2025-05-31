@@ -33,6 +33,7 @@
       <div class="card">
         <div class="card-body">
           <form method="POST" action="/updatePassword">
+            <input type="hidden" name="csrfToken" value="${csrfToken}">
             <div class="row">
               <!-- Current Password -->
               <div class="col-lg-6 col-sm-12">

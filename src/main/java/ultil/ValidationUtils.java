@@ -10,52 +10,43 @@ public class ValidationUtils {
         if (password == null) return "Mật khẩu không được để trống";
         if (password.trim().isEmpty()) return "Mật khẩu không được để trống";
 
-        // Kiểm tra độ dài tối thiểu
         if (password.length() < 8) {
             return "Mật khẩu phải có ít nhất 8 ký tự";
         }
 
-        // Kiểm tra độ dài tối đa để tránh DOS attacks
         if (password.length() > 128) {
             return "Mật khẩu không được vượt quá 128 ký tự";
         }
 
-        // Kiểm tra có chứa ít nhất một chữ thường
         if (!password.matches(".*[a-z].*")) {
-            return "Mật khẩu phải chứa ít nhất một chữ cái thường";
+            return "Mật khẩu phải chứa ít nhất một chữ cái thường và chứa ít nhất một chữ cái hoa, chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)";
         }
 
-        // Kiểm tra có chứa ít nhất một chữ hoa
         if (!password.matches(".*[A-Z].*")) {
-            return "Mật khẩu phải chứa ít nhất một chữ cái hoa";
+            return "Mật khẩu phải chứa ít nhất một chữ cái thường và chứa ít nhất một chữ cái hoa, chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)";
         }
 
-        // Kiểm tra có chứa ít nhất một số
         if (!password.matches(".*[0-9].*")) {
-            return "Mật khẩu phải chứa ít nhất một chữ số";
+            return "Mật khẩu phải chứa ít nhất một chữ cái thường và chứa ít nhất một chữ cái hoa, chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)";
         }
 
-        // Kiểm tra có chứa ít nhất một ký tự đặc biệt
         if (!password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
-            return "Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)";
+            return "Mật khẩu phải chứa ít nhất một chữ cái thường và chứa ít nhất một chữ cái hoa, chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)";
         }
 
-        // Kiểm tra không chứa khoảng trắng
         if (password.contains(" ")) {
             return "Mật khẩu không được chứa khoảng trắng";
         }
 
-        // Kiểm tra không chứa chuỗi lặp lại
         if (hasRepeatingSequence(password)) {
             return "Mật khẩu không được chứa chuỗi ký tự lặp lại liên tiếp";
         }
 
-        // Kiểm tra không phải là mật khẩu phổ biến
         if (isCommonPassword(password)) {
             return "Mật khẩu này quá phổ biến, vui lòng chọn mật khẩu khác";
         }
 
-        return null; // Mật khẩu hợp lệ
+        return null;
     }
 
     // Hàm phụ trợ kiểm tra chuỗi lặp lại

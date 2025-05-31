@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
+<script nonce="<%= cspNonce %>">
     function viewListProduct(orderID) {
         // $('#feedback').modal();
         loadListProduct(orderID);
@@ -57,7 +59,7 @@
                             '<tr>' +
                             '<td>' + (index + 1) + '</td>' +
                             '<td>' + product.categoryName + '</td>' +
-                            '<td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;" title="' + product.categoryDescription + '">' + product.categoryDescription + '</td>' +                            '<td>' + product.furniturePrice.toLocaleString() + ' VNĐ</td>' +
+                            '<td class="category-name" title="' + product.categoryDescription + '">' + product.categoryDescription + '</td>' +                            '<td>' + product.furniturePrice.toLocaleString() + ' VNĐ</td>' +
                             '<td><span class="badges ' + statusClass + '">' + statusText + '</span></td>' +
                             '<td>' + product.quantity + '</td>' +
                             '<td>' + product.totalPrice.toLocaleString() + ' VNĐ</td>' +

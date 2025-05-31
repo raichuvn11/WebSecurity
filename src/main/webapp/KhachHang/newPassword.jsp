@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 
 <!doctype html>
@@ -10,14 +11,11 @@
     <title>Đổi mật khẩu</title>
 
     <link href="../css/bootstrap.minfg.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script src="../js/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-    <style>
+    <style nonce="<%= cspNonce %>">
         .placeicon {
             font-family: fontawesome;
         }
@@ -51,9 +49,7 @@
 
                 <div class="pt-3 pb-3">
                     <form class="form-horizontal" action="newPassword" method="POST">
-
                         <input type="hidden" name="csrfToken" value="${csrfToken}">
-
                         <input type="hidden" name="action" value="LuuMatKhau">
 
                         <!-- New Password Input -->
@@ -96,10 +92,6 @@
     </div>
 </div>
 
-
 <script src="../js/bootstrap.bundle.minfg.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-
-
 </body>
 </html>

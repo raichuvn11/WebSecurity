@@ -64,7 +64,7 @@ public class VerifyServlet extends HttpServlet {
             String otpEmail = (String) session.getAttribute("otp");
             String otp = request.getParameter("otp");
             Customer cus = (Customer) session.getAttribute("customerInfor");
-            String mkMahHoa = MaHoa.toSHA1(cus.getPassword());
+            String mkMahHoa = MaHoa.toSHA512(cus.getPassword());
             cus.setPassword(mkMahHoa);
 
             Long otpCreationTime = (Long) session.getAttribute("otpCreationTime");

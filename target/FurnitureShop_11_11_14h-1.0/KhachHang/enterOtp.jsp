@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,7 @@
 
     <script
             src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
 
     <link rel="stylesheet"
@@ -35,7 +37,7 @@
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
-    <style type="text/css">
+    <style type="text/css" nonce="<%= cspNonce %>">
         .form-gap {
             padding-top: 70px;
         }
@@ -62,6 +64,7 @@
 
                         <div class="panel-body">
                             <form id="register-form" action="../ValidateOtp" role="form" autocomplete="off" class="form" method="post">
+                                <input type="hidden" name="csrfToken" value="${csrfToken}">
                                 <input type="hidden" name="action" value="XacThucOTP">
 
                                 <input type="hidden" name="csrfToken" value="${csrfToken}">

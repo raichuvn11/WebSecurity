@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="utils.ImageUtil" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <!DOCTYPE html>
 <html>

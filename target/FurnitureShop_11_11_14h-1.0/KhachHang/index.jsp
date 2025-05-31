@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,13 +14,11 @@
 	<meta name="keywords" content="bootstrap, bootstrap4" />
 
 	<!-- Bootstrap CSS -->
-
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../css/all.min.css" rel="stylesheet">
 	<link href="../css/tiny-slider.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="../css/swiper-bundle.min.css">
-
 	<title>Home Page</title>
 </head>
 
@@ -64,15 +64,15 @@
 						<div class="swiper-wrapper">
 							<c:forEach var="Furniture" items="${listFurniture}">
 								<div class="swiper-slide">
-
-
-									<form action="../furnitureServlet" method="GET" style="display:inline;">
-<%--										<input type="hidden" name="csrfToken" value="${csrfToken}">--%>
-
-
+									<style nonce="<%= cspNonce %>">
+										.inline-display {
+											display: inline;
+										}
+									</style>
+									<form action="../furnitureServlet" method="GET" class="inline-display">
 										<input type="hidden" name="furnitureId" value="${Furniture.id}">
 										<input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
-										<a href="javascript:void(0);" class="product-item" onclick="this.closest('form').submit();">
+										<a href="javascript:void(0);" class="product-item" role="button" tabindex="0">
 											<img src="data:image/png;base64,${Furniture.representativeImage.base64Data}"
 												 alt="${Furniture.representativeImage.fileName}" class="img-fluid product-thumbnail">
 											<h3 class="product-title">${Furniture.category.categoryName}</h3>
@@ -111,10 +111,10 @@
 						<div class="swiper-wrapper">
 							<c:forEach var="Furniture" items="${listFurnitureNew}">
 								<div class="swiper-slide">
-									<form action="../furnitureServlet" method="GET" style="display:inline;">
+									<form action="../furnitureServlet" method="GET" class="inline-display">
 										<input type="hidden" name="furnitureId" value="${Furniture.id}">
 										<input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
-										<a href="javascript:void(0);" class="product-item" onclick="this.closest('form').submit();">
+										<a href="javascript:void(0);" class="product-item" role="button" tabindex="0">
 											<img src="data:image/png;base64,${Furniture.representativeImage.base64Data}"
 												 alt="${Furniture.representativeImage.fileName}" class="img-fluid product-thumbnail">
 											<h3 class="product-title">${Furniture.category.categoryName}</h3>
@@ -230,7 +230,7 @@
 
 <c:import url="../includes/footer.jsp" />
 
-<script>
+<script nonce="<%= cspNonce %>">
 	function confirmLogout() {
 		if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
 			window.location.href = "LogoutServlet"; // Chuyển hướng đến servlet nếu người dùng chọn "OK"
@@ -238,7 +238,7 @@
 	}
 </script>
 
-<script>
+<script nonce="<%= cspNonce %>">
 	document.addEventListener("DOMContentLoaded", function () {
 		const swiper = new Swiper('.swiper-container', {
 			slidesPerView: 3, // Hiển thị 3 sản phẩm cùng lúc
@@ -255,16 +255,33 @@
 		});
 	});
 </script>
+<script nonce="<%= cspNonce %>">
+	document.querySelectorAll('.product-item').forEach(function(elem) {
+		elem.addEventListener('click', function(event) {
+			event.preventDefault();
+			const form = this.closest('form');
+			if (form) {
+				form.submit();
+			}
+		});
 
-
+		// (Tùy chọn) cho phép submit khi nhấn Enter nếu dùng tabindex trên thẻ <a>
+		elem.addEventListener('keypress', function(event) {
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				const form = this.closest('form');
+				if (form) {
+					form.submit();
+				}
+			}
+		});
+	});
+</script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/tiny-slider.js"></script>
+<script src="../js/custom.js"></script>
 <%--<script src="https://unpkg.com/swiper/swiper-bundle.min.js" integrity="sha384-cSxUTLgmloIEEwkAGghNE/gvxf8M62KcJJqltN1BzkBDqlJGkBqW3LzPVepQ+oRN" crossorigin="anonymous"></script>--%>
 <script src="../js/swiper-bundle.min.js"></script>
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<%--<script src="https://unpkg.com/swiper/swiper-bundle.min.js" integrity="sha384-cSxUTLgmloIEEwkAGghNE/gvxf8M62KcJJqltN1BzkBDqlJGkBqW3LzPVepQ+oRN" crossorigin="anonymous"></script>--%>
-<script src="../js/swiper-bundle.min.js"></script>
-
 <script src="../js/furniture.js"></script>
 </body>
 

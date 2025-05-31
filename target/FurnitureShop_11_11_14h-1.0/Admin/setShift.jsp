@@ -3,11 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Phân ca làm việc";
         const listStaffElement = document.getElementById("set-shift");
@@ -24,9 +25,7 @@
         <div class="card">
             <div class="card-body">
                 <form action="" method="post">
-
                     <input type="hidden" name="csrfToken" value="${csrfToken}">
-
                     <input type="hidden" name="month" value="${currentMonth}">
                     <input type="hidden" name="year" value="${currentYear}">
                     <div class="row">
@@ -71,7 +70,7 @@
                                     </div>
                                 </c:if>
                             </div>
-                            <button type="submit" name="action" value="submit" class="btn btn-success w-100 mt-2" onclick="return confirmSubmission()">Xác Nhận</button>
+                            <button type="submit" name="action" value="submit" class="btn btn-success w-100 mt-2" id="confirm-button">Xác Nhận</button>
                         </div>
 
                         <div class="col-lg-9">
@@ -100,10 +99,20 @@
 </div>
 </div>
 <script src="scripts/countSelectedShift.js"></script>
-<script>
+<script nonce="<%= cspNonce %>">
     function confirmSubmission() {
         const userConfirmed = confirm("Xác nhận chọn các ca làm việc này?");
         return userConfirmed;
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        const confirmBtn = document.getElementById('confirm-button');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', function(event) {
+                if (!confirmSubmission()) {
+                    event.preventDefault();
+                }
+            });
+        }
+    });
 </script>
 <c:import url="footer.jsp"/>

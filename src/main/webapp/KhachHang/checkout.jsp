@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,6 +14,7 @@
   <meta name="keywords" content="bootstrap, bootstrap4" />
 
 		<!-- Bootstrap CSS -->
+
 		<link href="../css/bootstrap.min.css" rel="stylesheet">
 
 		<link href="../css/all.min.css" rel="stylesheet">
@@ -22,9 +25,18 @@
 
 		<link href="../css/tiny-slider.css" rel="stylesheet">
 		<link href="../css/style.css" rel="stylesheet">
-		<link href="../css/checkout.css" rel="stylesheet">
+		<link href="../css/checkout1.css" rel="stylesheet">
 
 	<title>Thanh Toán</title>
+	<style nonce="<%= cspNonce %>">
+		.white-space {
+			height: 150px;
+		}
+		.center-with80 {
+			width: 80px;
+			text-align: center;
+		}
+	</style>
 	</head>
 
 	<body>
@@ -104,9 +116,9 @@
 							<table class="table site-block-order-table mb-5">
 								<thead>
 								<tr>
-									<th style="white-space: nowrap;">Hình ảnh</th>
+									<th class="white-space">Hình ảnh</th>
 									<th>Sản phẩm</th>
-									<th style="width: 80px; text-align: center;">Số lượng</th> <!-- Thêm style cho cột số lượng -->
+									<th class="center-with80">Số lượng</th> <!-- Thêm style cho cột số lượng -->
 									<th>Tổng tiền</th>
 								</tr>
 								</thead>
@@ -127,7 +139,7 @@
 											<td data-id="${furniture.category.id}">
 												<input type="number" class="quantity" value="1" min="1"
 													   data-price="${furniture.furniturePrice}"
-													   data-total="total-${furniture.category.categoryName}" onchange="updateTotal()"></td>
+													   data-total="total-${furniture.category.categoryName}"></td>
 
 											<!-- Tổng tiền cho sản phẩm -->
 											<td><span id="total-${furniture.category.categoryName}">${furniture.furniturePrice}</span></td>
@@ -155,7 +167,12 @@
 										</option>
 									</c:forEach>
 								</select>
-								<div id="coupon-details" class="mt-3" style="display:none;">
+								<style nonce="<%= cspNonce %>">
+									.none-display {
+										display: none;
+									}
+								</style>
+								<div id="coupon-details" class="mt-3 none-display" >
 									<p><strong>Ngày kết thúc:</strong> <span id="data-end-date"></span></p>
 									<p><strong>Điều kiện sử dụng:</strong> <span id="data-conditions"></span></p>
 									<p><strong>Giá trị:</strong> <span id="data-coupon-value"></span></p>
@@ -217,8 +234,13 @@
 								</div>
 							</div>
 
+							<style nonce="<%= cspNonce %>">
+								#overlay .none-display1 {
+									display: none;
+								}
+							</style>
 							<!-- Lớp phủ toàn trang -->
-							<div id="overlay" style="display:none">
+							<div id="overlay" class="none-display">
 								<div id="loadingMessage">
 									Vui lòng đợi, đang tạo mã QR...
 								</div>
@@ -227,7 +249,7 @@
 							<!-- Modal thông báo -->
 							<div id="paymentModal" class="modal">
 								<div class="modal-content">
-									<span class="close" onclick="closeModal()">&times;</span>
+									<span class="close">&times;</span>
 									<h2>Quét mã QR để thanh toán</h2>
 
 									<!-- Bộ đếm thời gian -->
@@ -250,8 +272,8 @@
 								</div>
 							</div>
 							<div class="form-group" id="payment-section">
-							<button class="btn btn-black btn-lg py-3 btn-block" id="btn-payment" onclick="checkMethodPayment()">Thanh toán</button>
-						  </div>
+								<button id="btn-payment" class="btn btn-black btn-lg py-3 btn-block">Thanh toán</button>
+							</div>
 						</div>
 					  </div>
 					</div>
@@ -261,7 +283,20 @@
 		  </div>
 
 		<c:import url="../includes/footer.jsp" />
+		<script nonce="<%= cspNonce %>">
+			document.addEventListener('DOMContentLoaded', function() {
+				// Bắt sự kiện click nút đóng modal
+				document.querySelector('.close').addEventListener('click', closeModal);
 
+				// Bắt sự kiện click nút thanh toán
+				document.getElementById('btn-payment').addEventListener('click', checkMethodPayment);
+
+				// Bắt sự kiện onchange cho các input số lượng
+				document.querySelectorAll('.quantity').forEach(function(input) {
+					input.addEventListener('change', updateTotal);
+				});
+			});
+		</script>
 		<script src="../js/bootstrap.bundle.min.js"></script>
 		<script src="../js/tiny-slider.js"></script>
 		<script src="../js/custom.js"></script>

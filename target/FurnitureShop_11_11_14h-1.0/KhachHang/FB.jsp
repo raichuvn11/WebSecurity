@@ -89,7 +89,7 @@
                 <c:forEach var="furniture" items="${feedback.order.listFurniture}">
                   <li>
                     <!-- Form cho từng furniture -->
-                    <form action="../furnitureServlet" method="post" class="mb-3">
+                    <form action="../furnitureServlet" method="GET" class="mb-3">
                       <!-- Hidden field để gửi ID hoặc thông tin liên quan -->
 
                       <input type="hidden" name="furnitureId" value="${furniture.id}">

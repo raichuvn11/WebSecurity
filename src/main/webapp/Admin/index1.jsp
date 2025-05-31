@@ -8,11 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
   document.addEventListener("DOMContentLoaded", function() {
     document.title = "Thống kê doanh thu";
     const listStaffElement = document.getElementById("revenue");
@@ -79,7 +80,15 @@
           <div class="card-body d-flex justify-content-center">
 
             <div class="col-lg-3 col-sm-6 col-12 d-flex flex-column align-items-center justify-content-center" >
-              <div class="dash-widget dash2" style="width: 12cm;">
+              <style nonce="<%= cspNonce %>">
+                .w12{
+                  width: 12cm;
+                }
+                .w90{
+                  max-width: 90%; width: 90%;
+                }
+              </style>
+              <div class="dash-widget dash2 w12" >
                 <div class="dash-widgetimg">
                   <span><img src="assets/img/icons/dash3.svg" alt="img"></span>
                 </div>
@@ -89,7 +98,7 @@
                 </div>
               </div>
 
-              <div class="dash-count das3" style="width: 12cm;">
+              <div class="dash-count das3 w12">
                 <div class="dash-counts">
                   <h4><span class="counters" data-count="${totalSales}"></span></h4>
                   <h5>Hóa đơn bán</h5>
@@ -126,7 +135,11 @@
           <c:forEach var="payment" items="${payments}">
             <tr>
               <td>${payment.paymentID}</td>
-              <td><a href="javascript:void(0);" onclick="viewListProduct(${payment.order.id})">${payment.order.id}</a></td>
+              <td>
+                <a href="javascript:void(0);" class="view-product-link" data-order-id="${payment.order.id}">
+                    ${payment.order.id}
+                </a>
+              </td>
               <td>${payment.method}</td>
               <td>${payment.getLongMoney()}</td>
               <td><fmt:formatDate value="${empty payment.paymentDate ? payment.order.orderDate : payment.paymentDate}" pattern="dd-MM-yyyy"/></td>
@@ -140,7 +153,8 @@
 </div>
 </div>
 <div class="modal fade" id="productOfOrderList" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document" style="max-width: 90%; width: 90%;">
+
+  <div class="modal-dialog modal-xl w90" role="document">
     <div class="modal-content" id="orderModalContent">
       <div class="modal-header" id="orderModalHeader">
         <h5 class="modal-title" id="modalTitle">Chi Tiết Hóa Đơn</h5>
@@ -201,6 +215,16 @@
   </div>
 </div>
 </div>
+<script nonce="<%= cspNonce %>">
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.view-product-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        const orderId = this.getAttribute('data-order-id');
+        viewListProduct(orderId);
+      });
+    });
+  });
+</script>
 <c:import url="footer.jsp"/>
 <jsp:include page="${pageContext.request.contextPath}/ordercustomer/loadProductOfOrder.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/ordercustomer/customer.css">

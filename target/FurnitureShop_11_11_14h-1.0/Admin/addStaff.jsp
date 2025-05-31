@@ -2,11 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function() {
         document.title = "Tạo tài khoản nhân viên";
         const listStaffElement = document.getElementById("list-staff");
@@ -30,9 +31,7 @@
         <div class="card">
             <div class="card-body">
                 <form action="${pageContext.request.contextPath}/addStaff" method="post" enctype="multipart/form-data">
-
                     <input type="hidden" name="csrfToken" value="${csrfToken}">
-
                     <div class="row">
                         <c:if test="${not empty message}">
                             <c:if test="${isSuccess == true}">
@@ -51,9 +50,17 @@
                         <div class="d-flex justify-content-center">
                             <div class="col-lg-3">
                                 <div class="form-group avatar-preview text-center">
-                                    <img id="avatar-image" src="images/blankavatar.jpg" alt="Avatar Preview" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                                    <style nonce="<%= cspNonce %>">
+                                        .wh150x{
+                                            width: 150px; height: 150px;
+                                        }
+                                        .none-display {
+                                            display: none;
+                                        }
+                                    </style>
+                                    <img id="avatar-image" src="images/blankavatar.jpg" alt="Avatar Preview" class="img-thumbnail mb-3 wh150x" >
                                     <label for="avatar" class="btn btn-primary btn-sm">Upload Avatar</label>
-                                    <input type="file" class="form-control-file" id="avatar" name="avatar" accept="image/*" onchange="previewAvatar(event)" style="display: none;">
+                                    <input type="file" class="form-control-file none-display" id="avatar" name="avatar" accept="image/*">
                                 </div>
                             </div>
                         </div>
@@ -131,7 +138,7 @@
 
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-submit me-2">Thêm</button>
-                            <button class="btn btn-cancel" type="button" onclick="window.location.href='${pageContext.request.contextPath}/listStaff'">Quay lại</button>
+                            <button class="btn btn-cancel" type="button" >Quay lại</button>
                         </div>
 
                     </div>
@@ -144,4 +151,17 @@
 </div>
 </div>
 <script src="scripts/loadAvatar.js"></script>
+<script nonce="<%= cspNonce %>">
+    document.addEventListener('DOMContentLoaded', function () {
+        // Gắn sự kiện change cho input avatar
+        document.querySelectorAll('#avatar').forEach(function(input) {
+            input.addEventListener('change', previewAvatar);
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.btn-cancel').addEventListener('click', function () {
+            window.location.href = '<c:url value="/listStaff"/>';
+        });
+    });
+</script>
 <c:import url="footer.jsp"/>

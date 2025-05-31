@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
   document.addEventListener("DOMContentLoaded", function() {
     document.title = "Chỉnh sửa thông tin sản phẩm";
     const listStaffElement = document.getElementById("add-product");
@@ -22,9 +24,7 @@
       </div>
 
       <form id="furnitureForm" action="product-controller" method="post" enctype="multipart/form-data">
-
         <input type="hidden" name="csrfToken" value="${csrfToken}">
-
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -55,22 +55,30 @@
               </div>
               <div class="col-lg-12">
                 <div class="form-group">
+                  <style nonce="<%= cspNonce %>">
+                    .h150{
+                      height: 150px;
+                    }
+                    .image{
+                      margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px;
+                    }
+                  </style>
                   <label>Mô tả</label>
-                  <textarea class="form-control" name="furnitureDescription" style="height: 150px">${furniture.furnitureDescription}</textarea>
+                  <textarea class="form-control h150" name="furnitureDescription">${furniture.furnitureDescription}</textarea>
                 </div>
               </div>
               <div class="col-lg-12">
                 <div class="form-group">
                   <label>Ảnh sản phẩm</label>
                   <div class="image-upload">
-                    <input type="file" name="images" multiple onchange="previewImage(event)">
+                    <input type="file" id="image-input" name="images" multiple>
                     <div class="image-uploads">
                       <img src="assets/img/icons/upload.svg" alt="img">
                       <h4>Kéo thả file từ thư mục để thêm ảnh</h4>
                     </div>
                   </div>
 
-                  <div id="uploaded-images" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px;" >
+                  <div id="uploaded-images" class="image" >
                     <ul class="row img_row">
                       <c:forEach var="imageData" items="${furniture.base64ImageData}" varStatus="status">
                         <li id="image-${furniture.imageID[status.index]}">
@@ -81,7 +89,7 @@
                             <div class="productviewscontent">
                               <input type="hidden" name="existingImageIds" value="${furniture.imageID[status.index]}" />
                               <input type="hidden" name="removedImageIds" id="removedImageIds" value="" />
-                              <a href="javascript:void(0);" class="hideset" onclick="removeImage(${furniture.imageID[status.index]})">x</a>
+                              <a href="javascript:void(0);" class="hideset remove-image" data-imageid="${furniture.imageID[status.index]}">x</a>
                             </div>
                           </div>
                         </li>
@@ -103,7 +111,24 @@
     </div>
   </div>
 </div>
-<script>
+<script nonce="<%= cspNonce %>">
+  document.addEventListener('DOMContentLoaded', function () {
+    const fileInput = document.getElementById('image-input');
+    if (fileInput) {
+      fileInput.addEventListener('change', previewImage);
+    }
+  });
+
+</script>
+<script nonce="<%= cspNonce %>">
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.remove-image').forEach(function(anchor) {
+      anchor.addEventListener('click', function() {
+        const imageID = this.getAttribute('data-imageid');
+        removeImage(imageID);
+      });
+    });
+  });
   let removedImageIds = [];
   function removeImage(imageId) {
     console.log("Bắt đầu xóa ảnh với ID:", imageId);

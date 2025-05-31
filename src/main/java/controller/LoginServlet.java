@@ -8,9 +8,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import business.Customer;
 import business.Staff;
@@ -24,7 +24,7 @@ import utils.MaHoa;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
-    private static final Logger logger = LoggerUtil.getLogger();
+    private  static final Logger logger = LoggerUtil.getLogger();
     private static final Map<String, Integer> loginAttempts = new HashMap<>();
     private static final int MAX_ATTEMPTS = 5;
 
@@ -41,14 +41,7 @@ public class LoginServlet extends HttpServlet {
         String role = request.getParameter("role");
         String message = "";
         HttpSession session = request.getSession();
-
-        // Get client IP
-        String ipAddress = request.getHeader("X-FORWARDED-FOR");
-        if (ipAddress == null) {
-            ipAddress = request.getRemoteAddr();
-        }
-
-        // Check if too many failed attempts
+        // Kiểm tra nếu bị quá số lần sai
         if (loginAttempts.containsKey(email) && loginAttempts.get(email) >= MAX_ATTEMPTS) {
             message = "Bạn đã đăng nhập sai quá nhiều lần. Vui lòng thử lại sau.";
             session.setAttribute("message", message);
@@ -56,23 +49,27 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+
+        // Lấy IP của client
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
         if (email == null || email.equals("") || pass == null || pass.equals("")) {
             message = "Vui lòng nhập đủ thông tin";
             logger.warning("Thiếu thông tin đăng nhập từ người dùng. IP: " + ipAddress);
         } else {
             if (role.equals("customer")) {
-                String passW = MaHoa.toSHA1(pass);
+                String passW = MaHoa.toSHA512(pass);
                 Customer customer = CustomerDB.getCustomerByEmailPass(email, passW);
                 if (customer == null || customer.getStatus().equals("InActive")) {
                     message = "Sai tài khoản hoặc mật khẩu";
-                    logger.warning("Đăng nhập KH thất bại: " + email + ", IP: " + ipAddress);
-                    // Increment failed attempts
                     loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
+                    logger.warning("Đăng nhập KH thất bại: " + email + ", IP: " + ipAddress);
                 } else {
-                    // Successful login: reset failed attempts
-                    loginAttempts.remove(email);
                     session.setAttribute("customer", customer);
-
+                    loginAttempts.remove(email);
                     String displayName = customer.getName();
                     String displayEmail = (customer.getEmail() != null && !customer.getEmail().isEmpty()) ? customer.getEmail() : customer.getGoogleLogin();
                     session.setAttribute("displayName", displayName);
@@ -90,12 +87,11 @@ public class LoginServlet extends HttpServlet {
                 Staff staff = StaffDB.getStaffByEmailPass(email, pass);
                 if (staff == null || staff.getStatus().equals("InActive")) {
                     message = "Sai tài khoản hoặc mật khẩu";
-                    logger.warning("Đăng nhập Nhân viên thất bại: " + email + ", IP: " + ipAddress);
                     loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
+                    logger.warning("Đăng nhập Nhân viên thất bại: " + email + ", IP: " + ipAddress);
                 } else {
-                    loginAttempts.remove(email);
                     session.setAttribute("staff", staff);
-
+                    loginAttempts.remove(email);
                     String displayName = staff.getName();
                     String displayEmail = staff.getEmail();
                     session.setAttribute("displayName", displayName);
@@ -112,12 +108,12 @@ public class LoginServlet extends HttpServlet {
             } else if (role.equals("owner")) {
                 Owner owner = OwnerDB.getOwnerByEmailPass(email, pass);
                 if (owner == null) {
+                    loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
                     message = "Sai tài khoản hoặc mật khẩu";
                     logger.warning("Đăng nhập Chủ sở hữu thất bại: " + email + ", IP: " + ipAddress);
-                    loginAttempts.put(email, loginAttempts.getOrDefault(email, 0) + 1);
                 } else {
-                    loginAttempts.remove(email);
                     session.setAttribute("owner", owner);
+                    loginAttempts.remove(email);
                     logger.info("Chủ sở hữu đăng nhập thành công: " + owner.getEmail() + ", IP: " + ipAddress);
                     url = "/listStaff";
                 }
@@ -131,8 +127,8 @@ public class LoginServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + url);
     }
 
+
     /**
-     * Check if customer profile is complete
      */
     private boolean isProfileCompleteCus(Customer customer) {
         return customer.getPhone() != null &&
@@ -140,7 +136,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     /**
-     * Check if staff profile is complete
+     * Kiểm tra xem hồ sơ của Staff có đầy đủ thông tin chưa.
      */
     private boolean isProfileCompleteSta(Staff staff) {
         return staff.getPhone() != null && !staff.getPhone().isEmpty() &&

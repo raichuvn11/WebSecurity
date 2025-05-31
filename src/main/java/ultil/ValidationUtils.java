@@ -6,7 +6,6 @@ public class ValidationUtils {
         return email.matches(emailRegex);
     }
 
-
     public static String validatePassword(String password) {
         if (password == null) return "Mật khẩu không được để trống";
         if (password.trim().isEmpty()) return "Mật khẩu không được để trống";
@@ -87,6 +86,5 @@ public class ValidationUtils {
         }
         return false;
     }
-
 
 }

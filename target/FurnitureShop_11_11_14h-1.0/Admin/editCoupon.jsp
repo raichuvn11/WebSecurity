@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 <%
   List<String> errors = (List<String>) session.getAttribute("errors");
 
@@ -26,7 +27,7 @@
 <c:import url="header.jsp" />
 <%--------------------------------------------------------%>
 <c:import url="sidebar.jsp" />
-<script>
+<script nonce="<%= cspNonce %>">
   document.addEventListener("DOMContentLoaded", function() {
     document.title = "Chỉnh sửa mã giảm giá";
     const listStaffElement = document.getElementById("create-coupon");
@@ -67,9 +68,7 @@
               </div>
               <% } %>
               <form action="CouponController" method="POST">
-
                 <input type="hidden" name="csrfToken" value="${csrfToken}">
-
                 <input type="hidden" name="action" value="edit">
                 <div class="form-group row">
                   <label class="col-form-label col-md-2">Tên Mã Khuyến Mãi</label>
@@ -124,22 +123,26 @@
                 <div class="form-group row">
                   <label class="col-form-label col-md-2">Điều kiện áp dụng</label>
                   <div class="col-md-10">
-                    <select id="useCondition" class="form-control select" name="useCondition" required onchange="toggleFields()">
+                    <select id="useCondition" class="form-control select" name="useCondition" required>
                       <option value="all" ${coupon.useCondition == 'all' ? 'selected' : ''}>Tất cả hóa đơn</option>
                       <option value="min" ${coupon.useCondition == 'min' ? 'selected' : ''}>Trên số tiền nhất định</option>
                       <option value="product" ${coupon.useCondition == 'product' ? 'selected' : ''}>Sản Phẩm</option>
                     </select>
                   </div>
                 </div>
-
-                <div class="form-group row" id="minOrderValueDiv" style="display: none;">
+                <style nonce="<%= cspNonce %>">
+                  .none-display{
+                    display: none;
+                  }
+                </style>
+                <div class="form-group row none-display" id="minOrderValueDiv">
                   <label class="col-form-label col-md-2">Số tiền tối thiểu (nếu có)</label>
                   <div class="col-md-10">
                     <input type="text" id="minOrderValue" class="form-control" placeholder="Số tiền tối thiểu" name="minOrderValue" value="${coupon.minOrderValue}">
                   </div>
                 </div>
 
-                <div class="form-group row" id="categorySelectDiv" style="display: none;">
+                <div class="form-group row none-display" id="categorySelectDiv" >
                   <label class="col-form-label col-md-2">Danh mục (nếu có)</label>
                   <div class="col-md-10">
                     <select id="categoryIds" class="form-control tagging" multiple="multiple" name="categoryIds">
@@ -182,26 +185,7 @@
   </div>
 </div>
 
-<script>
-  $(document).ready(function() {
-    // Khởi tạo Select2
-    $('#product-select').select2();
-
-    // Lấy giá trị khi nhấn nút
-    $('#get-selected-values').click(function() {
-      const selectedValues = $('#product-select').val(); // Lấy mảng các giá trị đã chọn
-
-      // Kiểm tra và hiển thị thông báo
-      if (selectedValues.length > 0) {
-        $('#selected-values-message').html(`Các giá trị đã chọn: ${selectedValues.join(', ')}`);
-      } else {
-        $('#selected-values-message').html("Không có giá trị nào được chọn.");
-      }
-    });
-  });
-</script>
-
-<script>
+<script nonce="<%= cspNonce %>">
   function toggleFields() {
     const useCondition = document.getElementById("useCondition").value;
     const minOrderValueDiv = document.getElementById("minOrderValueDiv");
@@ -230,3 +214,32 @@
   document.addEventListener("DOMContentLoaded", toggleFields);
 </script>
 <c:import url="footer.jsp"/>
+<script nonce="<%= cspNonce %>">
+  $(document).ready(function() {
+    // Khởi tạo Select2
+    $('#product-select').select2();
+
+    // Lấy giá trị khi nhấn nút
+    $('#get-selected-values').click(function() {
+      const selectedValues = $('#product-select').val(); // Lấy mảng các giá trị đã chọn
+
+      // Kiểm tra và hiển thị thông báo
+      if (selectedValues.length > 0) {
+        $('#selected-values-message').html(`Các giá trị đã chọn: ${selectedValues.join(', ')}`);
+      } else {
+        $('#selected-values-message').html("Không có giá trị nào được chọn.");
+      }
+    });
+  });
+</script>
+<script nonce="<%= cspNonce %>">
+  $(document).ready(function () {
+    $('#useCondition').select2();
+
+    $('#useCondition').on('change', function (e) {
+      const selectedValue = $(this).val();
+      console.log('Giá trị được chọn:', selectedValue);
+      toggleFields(); // gọi hàm xử lý nếu cần
+    });
+  });
+</script>

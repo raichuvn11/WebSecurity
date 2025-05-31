@@ -8,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -19,14 +20,11 @@
     <meta name="keywords" content="bootstrap, bootstrap4" />
 
     <!-- Bootstrap CSS -->
-
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="css/tiny-slider.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/all.min.css" rel="stylesheet">
+    <link href="../css/tiny-slider.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
 
     <title>Trang chi tiết sản phẩm </title>
 </head>
@@ -64,10 +62,13 @@
                             <li>NSX: ${furniture.category.manufacture}</li>
                             <li>Danh mục: ${furniture.category.categoryName}</li>
                         </ul>
-                        <form action="../PurchaseServlet" method="POST" class="btn-form" style="display:inline;">
-
+                        <style nonce="<%= cspNonce %>">
+                            .inline-display {
+                                display: inline;
+                            }
+                        </style>
+                        <form action="../PurchaseServlet" method="POST" class="btn-form inline-display" >
                             <input type="hidden" name="csrfToken" value="${csrfToken}">
-
                             <input type="hidden" name="furnitureID" value="${furniture.id}">
                             <input type="hidden" name="action" value="addtocart">
                             <button type="submit" class="btn-submit">
@@ -109,13 +110,10 @@
                         <div class="swiper-wrapper">
                             <c:forEach var="Furniture" items="${listFurniture}">
                                 <div class="swiper-slide">
-                                    <form action="../furnitureServlet" method="POST" style="display:inline;">
-
-                                        <input type="hidden" name="csrfToken" value="${csrfToken}">
-
+                                    <form action="../furnitureServlet" method="GET" class="inline-display">
                                         <input type="hidden" name="furnitureId" value="${Furniture.id}">
                                         <input type="hidden" name="furnitureCategoryID" value="${Furniture.category.id}">
-                                        <a href="javascript:void(0);" class="product-item" onclick="this.closest('form').submit();">
+                                        <a href="javascript:void(0);" class="product-item" role="button" tabindex="0">
                                             <img src="data:image/png;base64,${Furniture.representativeImage.base64Data}"
                                                  alt="${Furniture.representativeImage.fileName}" class="img-fluid product-thumbnail">
                                             <h3 class="product-title">${Furniture.category.categoryName}</h3>
@@ -139,7 +137,7 @@
 <!-- End Product Section -->
 <c:import url="../includes/footer.jsp" />
 
-<script>
+<script nonce="<%= cspNonce %>">
     document.addEventListener("DOMContentLoaded", function () {
         const swiper = new Swiper('.swiper-container', {
             slidesPerView: 3, // Hiển thị 3 sản phẩm cùng lúc
@@ -157,14 +155,33 @@
     });
 </script>
 
+<script nonce="<%= cspNonce %>">
+    document.querySelectorAll('.product-item').forEach(function(elem) {
+        elem.addEventListener('click', function(event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            if (form) {
+                form.submit();
+            }
+        });
 
-
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/tiny-slider.js"></script>
-<script src="../js/custom.js"></script>
-<script src="../js/swiper-bundle.min.js"></script>
-<script src="../js/furniture.js"></script>
-
+        // (Tùy chọn) cho phép submit khi nhấn Enter nếu dùng tabindex trên thẻ <a>
+        elem.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                const form = this.closest('form');
+                if (form) {
+                    form.submit();
+                }
+            }
+        });
+    });
+</script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/tiny-slider.js"></script>
+<script src="js/custom.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="js/furniture.js"></script>
 
 
 </body>

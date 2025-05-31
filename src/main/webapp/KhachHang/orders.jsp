@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <!doctype html>
 <html lang="en">
@@ -18,6 +19,7 @@
 	<link href="../css/tiny-slider.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="../css/orders.css" rel="stylesheet">
+	<link href="../css/order2.css" rel="stylesheet">
 
 	<script type="text/javascript" src="../js/orders.js"></script>
 
@@ -58,16 +60,16 @@
 	<a class="nav-link" href="manageOrdersServlet?action=filterOrders&status=FEEDBACKED" ${param.status == 'FEEDBACKED' ? 'class="active"' : ''}>Đã đánh giá</a>
 </div>
 
-<div id="feedbackModal" class="modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; max-width: 700px; height: auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); z-index: 9999;">
-	<div class="modal-content" style="padding: 20px; text-align: center;">
-		<div class="modal-header" style="margin-bottom: 20px;">
-			<h3 style="margin: 0; color: #000; font-family: Arial, sans-serif; font-weight: bold;">Phản hồi của bạn:</h3>
+<div id="feedbackModal" class="modal modal-custom">
+	<div class="modal-content modal-center">
+		<div class="modal-header modal-bottom">
+			<h3 class="modal-h3">Phản hồi của bạn:</h3>
 		</div>
-		<div class="modal-body" style="font-size: 16px; color: #555; line-height: 1.5;">
+		<div class="modal-body modal-body-font" >
 			<p id="notificationText">Đây là nội dung thông báo của bạn!</p>
 		</div>
-		<div class="modal-footer" style="margin-top: 20px;">
-			<button type="button" id="closeModalBtn" style="background: #28a745; color: #fff; border: none; padding: 10px 20px; font-size: 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">
+		<div class="modal-footer modal-marin-top">
+			<button type="button" id="closeModalBtn" >
 				Đóng
 			</button>
 		</div>
@@ -78,9 +80,7 @@
 	<div class="container">
 		<div class="row mb-5">
 			<form class="col-md-12" method="post">
-
 				<input type="hidden" name="csrfToken" value="${csrfToken}">
-
 				<div class="site-blocks-table">
 					<table class="table">
 						<thead>
@@ -99,7 +99,7 @@
 									<td class="product-image">
 										<img src="data:image/png;base64,${item[0].representativeImage.base64Data}"
 											 alt="${item[0].representativeImage.fileName}"
-											 style="max-width: 100px; max-height: 100px; object-fit: cover; border-radius: 5px; margin: 5px;">
+											 class="product-thumbnail">
 									</td>
 									<td class="product-name">${item[0].category.categoryName}</td>
 									<td>
@@ -129,36 +129,49 @@
 							<tr>
 								<c:if test="${order.status == 'WAITING_PROCESS'}">
 									<td>
-										<button type="button" class="btn-order" onclick="confirmAction(${order.id}, 'cancelOrder')">Hủy đơn</button>
+										<button type="button" class="btn-order"
+												data-action="cancelOrder"
+												data-order-id="${order.id}">Hủy đơn</button>
 									</td>
 								</c:if>
 
 								<c:if test="${order.orderDate ge sevenDaysAgo}">
 									<c:if test="${order.status == 'DELIVERED' || order.status == 'ACCEPTED' || order.status == 'FEEDBACKED'}">
 										<td>
-											<button type="button" class="btn-order" onclick="confirmAction(${order.id}, 'refundOrder')">Hoàn đơn</button>
+											<button type="button" class="btn-order"
+													data-action="refundOrder"
+													data-order-id="${order.id}">Hoàn đơn</button>
 										</td>
 									</c:if>
 									<c:if test="${order.status == 'DELIVERED'}">
 										<td>
-											<button type="button" class="btn-order" onclick="confirmAction(${order.id}, 'acceptOrder')">Chấp nhận</button>
+											<button type="button" class="btn-order"
+													data-action="acceptOrder"
+													data-order-id="${order.id}">Chấp nhận</button>
 										</td>
 									</c:if>
 									<c:if test="${order.status == 'ACCEPTED'}">
 										<td>
-											<button type="button" class="btn-order" onclick="feedbackOrder(${order.id}, ${order.customer.personID})">Phản hồi</button>
+											<button type="button" class="btn-order"
+													data-action="feedbackOrder"
+													data-order-id="${order.id}"
+													data-person-id="${order.customer.personID}">Phản hồi</button>
 										</td>
 									</c:if>
 								</c:if>
+
 								<c:if test="${order.status == 'FEEDBACKED'}">
 									<td>
-										<button type="button" class="btn-order"  onclick="viewFeedback(${order.id})">Xem phản hồi</button>
+										<button type="button" class="btn-order"
+												data-action="viewFeedback"
+												data-order-id="${order.id}">Xem phản hồi</button>
 									</td>
 								</c:if>
 							</tr>
+
 							</tbody>
 
-							<tr style="height: 20px;"></tr>
+							<tr class="height20"></tr>
 						</c:forEach>
 					</table>
 				</div>
@@ -166,7 +179,34 @@
 		</div>
 	</div>
 </div>
+<script nonce="<%= cspNonce %>">
+	document.addEventListener('DOMContentLoaded', function () {
+		// Bắt sự kiện click cho các nút hành động đơn hàng
+		document.querySelectorAll('.btn-order').forEach(function (button) {
+			button.addEventListener('click', function () {
+				const action = button.getAttribute('data-action');
+				const orderId = button.getAttribute('data-order-id');
+				const personId = button.getAttribute('data-person-id');
 
+				switch (action) {
+					case 'cancelOrder':
+					case 'refundOrder':
+					case 'acceptOrder':
+						confirmAction(orderId, action);
+						break;
+					case 'feedbackOrder':
+						feedbackOrder(orderId, personId);
+						break;
+					case 'viewFeedback':
+						viewFeedback(orderId);
+						break;
+					default:
+						console.warn('Hành động không xác định:', action);
+				}
+			});
+		});
+	});
+</script>
 <c:import url="../includes/footer.jsp" />
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/tiny-slider.js"></script>

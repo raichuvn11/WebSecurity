@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,18 +15,11 @@
 
 	<!-- Bootstrap CSS -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
-
 	<link href="../css/all.min.css" rel="stylesheet">
-
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-	<link href="../css/all.min.css" rel="stylesheet">
-
 	<link href="../css/tiny-slider.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="../css/cart.css" rel="stylesheet">
 	<link href="../css/checkout.css" rel="stylesheet">
-
 	<title>Giỏ Hàng</title>
 </head>
 
@@ -55,9 +50,7 @@
 	<div class="container">
 		<div class="row mb-5">
 			<form class="col-md-12" method="post" action="../PurchaseServlet">
-
 				<input type="hidden" name="csrfToken" value="${csrfToken}">
-
 				<div class="site-blocks-table">
 					<table class="table">
 						<thead>
@@ -86,15 +79,19 @@
 								<td class="product-price">${furniture.furniturePrice}</td>
 								<td class="product-name">${furniture.category.manufacture}</td>
 								<td>
-									<button type="button" class="btn btn-black btn-sm" onclick="showConfirmModal('${furniture.id}')">X</button>
-
+									<button type="button" class="btn btn-black btn-sm btn-show-modal" data-id="${furniture.id}">X</button>
+									<style nonce="<%= cspNonce %>">
+										.inline-display {
+											display: inline;
+										}
+									</style>
 									<!-- Modal xác nhận -->
-									<div id="confirmCloseModal" class="modal" style="display:none;">
+									<div id="confirmCloseModal-${furniture.id}" class="modal" class="inline-display">
 										<div class="modal-content">
 											<p>Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?</p>
 											<div class="button-group">
-												<button type="button" id="confirmCloseYes" onclick="submitForm()">Đồng ý</button>
-												<button type="button" id="confirmCloseNo" onclick="closeModal()">Hủy</button>
+												<button type="button" class="btn-confirm-yes" data-id="${furniture.id}">Đồng ý</button>
+												<button type="button" class="btn-confirm-no">Hủy</button>
 											</div>
 										</div>
 									</div>
@@ -114,10 +111,7 @@
 			<div class="col-md-6">
 				<div class="row mb-5">
 					<div class="col-md-6">
-
-
-
-						<form action="../shopServlet" method="GET" style="display:inline;">
+						<form action="../shopServlet" method="GET" class="inline-display">
 							<button class="btn btn-outline-black btn-sm btn-block">Tiếp tục mua sắm</button>
 						</form>
 					</div>
@@ -128,9 +122,8 @@
 					<div class="col-md-7">
 						<div class="row">
 							<div class="col-md-12">
-								<form action="../PurchaseServlet" method="POST" style="display:inline;" id="purchaseForm">
+								<form action="../PurchaseServlet" method="POST" class="inline-display" id="purchaseForm">
 									<input type="hidden" name="csrfToken" value="${csrfToken}">
-
 									<input type="hidden" name="action" value="purchase">
 									<button id="checkoutBtn" class="btn btn-outline-black btn-sm btn-block">Mua hàng</button>
 								</form>
@@ -148,7 +141,7 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/tiny-slider.js"></script>
 <script src="../js/custom.js"></script>
-<script src="../js/cart.js"></script>
+<script src="../js/cartNew.js"></script>
 
 </body>
 

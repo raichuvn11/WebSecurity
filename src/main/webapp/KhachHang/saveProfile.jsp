@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String cspNonce = (String) request.getAttribute("cspNonce"); %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +16,10 @@
     <link rel="stylesheet" href="<c:url value='/assets/css/style.css'/>">
 
     <!-- SweetAlert2 CSS -->
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 
     <title>Save Profile</title>
+
 </head>
 <body>
 <div class="main-wrapper">
@@ -36,9 +35,7 @@
             <div class="card">
                 <div class="card-body">
                     <form method="POST" action="<c:url value='/saveProfile'/>" enctype="multipart/form-data">
-
                         <input type="hidden" name="csrfToken" value="${csrfToken}">
-
                         <div class="row">
                             <!-- Name -->
                             <div class="col-lg-6 col-sm-12">
@@ -122,14 +119,23 @@
 <!-- jQuery and Bootstrap -->
 <script src="<c:url value='/assets/js/jquery-3.6.0.min.js'/>"></script>
 <script src="<c:url value='/assets/js/bootstrap.bundle.min.js'/>"></script>
-
+<script nonce="<%= cspNonce %>">
+    (function(){
+        const originalCreateElement = document.createElement;
+        document.createElement = function(tagName) {
+            const el = originalCreateElement.call(document, tagName);
+            if (tagName.toLowerCase() === 'style') {
+                el.setAttribute('nonce', '<%= cspNonce %>');
+            }
+            return el;
+        }
+    })();
+</script>
 <!-- SweetAlert2 JS -->
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-
+<script src="../js/sweetalert2.all.min.js"></script>
 
 <!-- SweetAlert2 Success Notification -->
-<script>
+<script nonce="<%= cspNonce %>" >
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
 
@@ -139,10 +145,14 @@
             text: 'Thông tin của bạn đã được lưu thành công.',
             icon: 'success',
             confirmButtonText: 'OK',
+            customClass: {
+                popup: 'my-popup',
+                title: 'my-title',
+                confirmButton: 'my-confirm'
+            },
+            buttonsStyling: false, // Bắt buộc để vô hiệu hóa inline style mặc định
             timer: 3000,
             timerProgressBar: true
-        }).then(() => {
-            window.location.href = '<c:url value="/indexServlet"/>';
         });
     }
 
